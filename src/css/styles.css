@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DK+Uloopet+Guides&display=swap');
+:root{
+    --primary-color: #ffffff;
+    --secondary-color: #4a90e2;
+    --background-color: #aaaaff;
+    --text-color: #000000;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-family: Playwrite DK Uloopet Guides, cursive;
+    font-size: 12pt;
+    color: var(--text-color);
+    text-align: center;
+}
+body{
+    min-height: 100vh;
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-input{
+  border-radius: 50px; /* Adjust based on height */
+  height: 40px;
+  width: 200px;
+  padding: 0 15px; /* Padding for text inside */
+  border: 1px solid #ccc;
+}
