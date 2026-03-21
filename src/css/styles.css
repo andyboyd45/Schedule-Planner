@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+DK+Uloopet+Guides&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 :root{
-    --primary-color: #ffffff;
-    --secondary-color: #4a90e2;
-    --background-color: #aaaaff;
+    --primary-color: #000000;
+    --secondary-color: #ffffff;
+    --background-color: #ffffff;
     --text-color: #000000;
 }
 *{
@@ -11,18 +12,53 @@
     box-sizing: border-box;
 }
 html{
-    font-family: Playwrite DK Uloopet Guides, cursive;
+    font-family: 'Playwrite DK Uloopet Guides', cursive;
     font-size: 12pt;
     color: var(--text-color);
-    text-align: center;
 }
-body{
-    min-height: 100vh;
+
+header{
+    font-size: 36pt;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: 2px solid rgb(8, 0, 0);
+}
+.Paragraph{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14pt;
+    color: var(--text-color);
     background-color: var(--background-color);
+    padding: 20px;
+    text-align: left;
+    width: 100%;
+}
+.wrapper{
+    align-items: center;
+    justify-content: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 20px;
 }
+.signup-button{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18pt;
+    background: none;
+    cursor: pointer;
+    color:rgb(8, 0, 0);
+    border: none;
+    transition: color 0.3s ease;
+}
+
+.signup-button:hover{
+    color:#acb3ff
+}
+
+
 .form-input{
   border-radius: 50px; /* Adjust based on height */
   height: 40px;
