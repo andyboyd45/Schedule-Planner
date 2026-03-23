@@ -21,26 +21,30 @@ header{
     font-size: 36pt;
     color: var(--primary-color);
     background-color: var(--secondary-color);
-    padding: 2%;
+    padding-right: 2%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     border-bottom: 2px solid rgb(8, 0, 0);
 }
+.logo-image{
+    height: 200px;
+    width: 200px;
+}
 .base{
     display: flex;
     padding-top: 5%;
 }
 .base-paragraph{
-    background-image: url(public/images/pexels-cottonbro-4778407.jpg);
+    background-image: url(../../public/images/pexels-cottonbro-4778407.jpg);
     font-family: 'Montserrat', sans-serif;
     font-size: 14pt;
     color: var(--text-color);
     background-color: var(--background-color);
     padding-top: 8%;
     text-align: left;
-    width: 100%;
+    
 }
 .base-login{
     font-family: 'Montserrat', sans-serif;
