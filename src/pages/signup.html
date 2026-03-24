@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/src/css/signup.css">
+</head>
+<body>
+    <!-- Top left Text-->
+    <header>
+        <img src="/public/icons/Aaa06a18e49de4d9abade5813982b91372.png" alt="Schedule Planner Logo" class="logo-image">
+        <button onclick="window.location.href='../../../index.html'" class="Home-button" name="signup">Home</button>
+    </header>
+
+        <!-- Text on Right middle-->
+        <div class = "base">
+            <p>Sign Up</p>
+    
+        <!-- Sign up -->
+            <form id = "signup-form" action="/src/pages/signup.html" method="POST">
+                <div class = "form-group">
+                    <input  type = "text" class = "form-input" name = "username" id="username-input"  placeholder="Username">
+                </div>
+                <div class = "form-group">
+                    <input  type = "email" class = "form-input" name = "email" id="email-input" placeholder="Email">
+                </div>
+                <div class = "form-group">
+                    <input  type = "password" class = "form-input" name = "new password" id="password-input" placeholder="Password">
+                </div>
+                <div class = "form-group">
+                    <input  type = "password" class = "form-input" name = "confirm password" id="confirm-password-input" placeholder="Confirm Password">
+                </div>
+                <div class = "form-group">
+                <button class = "signup-button" type="submit">Sign Up</button>
+                </div>
+                <p id = "error-message" class = "error-message"></p>
+                <p class = "login-link" id = "login-link">Already have an account? <a href="/index.html">Login here</a></p>
+            </form>
+        </div>     
+
+    <script src="/src/js/signup-form.js" defer></script>
+</body>
+</html>

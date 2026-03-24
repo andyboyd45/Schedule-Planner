@@ -16,7 +16,6 @@ html{
     font-size: 12pt;
     color: var(--text-color);
 }
-
 header{
     font-size: 36pt;
     color: var(--primary-color);
@@ -32,7 +31,7 @@ header{
     height: 200px;
     width: 200px;
 }
-.signup-button{
+.Home-button{
     font-family: 'Montserrat', sans-serif;
     font-size: 18pt;
     background: none;
@@ -41,52 +40,18 @@ header{
     border: none;
     transition: color 0.3s ease;
 }
-.signup-button:hover{
+.Home-button:hover{
     color:#acb3ff
 }
-
 .base{
+    font-family: 'Montserrat', sans-serif;
     display: flex;
-    padding-top: 5%;
-    height: 500px;
-    
-}
-.base-paragraph{
-    background-image: url(../../public/images/pexels-cottonbro-4778407.jpg);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14pt;
-    color: var(--text-color);
-    background-color: var(--background-color);
-    padding-top: 8%;
-    text-align: left;
-}
-.base-login{
-    font-family: 'Montserrat', sans-serif;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    padding-left: 10%;
-    padding-right: 10%;
     align-items: center;
     justify-content: center;
     display: flex;
     flex-direction: column;
-    
+    padding-top: 20%;
 }
-
-.form-group{
-    padding: 2%;
-    display: flex;
-}
-.icon{
-    height: 34px;
-    padding-right: 2%;
-}
-.form-group-button{
-    padding: 2%;
-    display: flex;
-    justify-content: flex-end;
-}
-
 .form-input{
     border-radius: 50px; /* Adjust based on height */
     height: 40px;
@@ -94,17 +59,32 @@ header{
     padding: 0 15px; /* Padding for text inside */
     border: 1px solid #ccc;
 }
-
-.login-button{
+.signup-button{
     font-family: 'Montserrat', sans-serif;
     border-radius: 20px; /* Adjust based on height */
     height: 40px;
     width: 200px;
     padding: 0 15px; /* Padding for text inside */
     border: 1px solid #ccc;
-    align-items: right;
+    align-items: right;    
 }
-
+.form-group{
+    padding: 2%;
+}
+.login-link{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8pt;
+    color: var(--text-color);
+    margin-top: 10px;
+}
+.error-message{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8pt;
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+    display: none; /* Initially hidden */
+}
 
 @media (max-width: 768px) {
     header{
@@ -113,8 +93,5 @@ header{
     }
     .base{
         flex-direction: column;
-    }
-    .base-paragraph, .base-login{
-        width: 100%;
     }
 }
