@@ -28,5 +28,16 @@ signup_form.addEventListener('submit', function(event) {
     }
 
     //Still need to add function to send data to backend and store in SQL database
+    fetch("/signup", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username: username,
+            email: email,
+            password: password
+        })
+    });
 
 });
