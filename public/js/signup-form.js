@@ -41,6 +41,18 @@ signup_form.addEventListener('submit', async function(event) {
                 password: password
             })
         });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Signup successful, redirect to login page
+            window.location.href = '/public/pages/login.html';
+        }        
+        else {
+            let errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = data.error || 'An error occurred while signing up. Please try again.';
+            errorMessage.style.display = 'block';
+        }
     } catch (error) {
         console.error('Error signing up:', error);
             let errorMessage = document.getElementById('error-message');
