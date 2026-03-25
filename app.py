@@ -16,11 +16,11 @@ def serve_index():
 # Database connection
 def get_db():
     return mysql.connector.connect(
-        host=os.getenv('DB_HOST'),
-        port=int(os.getenv('DB_PORT')),
-        user=os.getenv('DB_USER'),
-        password=os.getenv('DB_PASSWORD'),
-        database=os.getenv('DB_NAME')
+        host=os.getenv('MYSQLHOST'),
+        port=int(os.getenv('MYSQLPORT')),
+        user=os.getenv('MYSQLUSER'),
+        password=os.getenv('MYSQLPASSWORD'),
+        database=os.getenv('MYSQL_DATABASE')
     )
     
 #Generate Serial ID for each user
