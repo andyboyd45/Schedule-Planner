@@ -30,7 +30,7 @@ def generate_serial_id():
     db = get_db()
     cursor = db.cursor()
     
-    cursor.execute("SELECT id FROM users WHERE id = %s", (ID,))
+    cursor.execute("SELECT ID FROM users WHERE ID = %s", (ID,))
     if cursor.fetchone():
         return generate_serial_id()  # Generate a new ID if the current one exists
 
@@ -55,7 +55,7 @@ def signup():
         cursor = db.cursor()
 
         # Check if user already exists
-        cursor.execute("SELECT id FROM users WHERE email = %s", (email,))
+        cursor.execute("SELECT ID FROM users WHERE email = %s", (email,))
         if cursor.fetchone():
             return jsonify({'error': 'User already exists'}), 400
 
