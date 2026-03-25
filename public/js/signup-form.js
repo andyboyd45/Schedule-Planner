@@ -51,12 +51,14 @@ signup_form.addEventListener('submit', async function(event) {
         }        
         else {
             let errorMessage = document.getElementById('error-message');
+            console.log('RESPONSE ERROR');
             errorMessage.textContent = data.error || 'RESPONSE ERROR: An error occurred while signing up. Please try again.';
             errorMessage.style.display = 'block';
         }
     } catch (error) {
         console.error('Error signing up:', error);
             let errorMessage = document.getElementById('error-message');
+            console.log('TRY CATCH ERROR');
             errorMessage.textContent = 'TRY CATCH ERROR: An error occurred while signing up. Please try again.';
             errorMessage.style.display = 'block';
     }

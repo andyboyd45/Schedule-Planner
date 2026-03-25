@@ -68,7 +68,7 @@ def signup():
         return jsonify({'message': 'User created successfully'}), 201
     except Exception as e:
         print(e)
-        return jsonify({'error': 'An error occurred while creating the user'}), 500
+        return jsonify({'error': 'PYTHON ERROR: An error occurred while creating the user'}), 500
     finally:
         cursor.close()
         db.close()
