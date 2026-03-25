@@ -1,6 +1,7 @@
+
 const signup_form = document.getElementById('signup-form');
 
-signup_form.addEventListener('submit', function(event) {
+signup_form.addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent form submission
 
     // Get form values
@@ -28,16 +29,22 @@ signup_form.addEventListener('submit', function(event) {
     }
 
     //Still need to add function to send data to backend and store in SQL database
-    fetch("/signup", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            username: username,
-            email: email,
-            password: password
-        })
-    });
-
+    try{
+        const response = await fetch('/api/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,
+                email: email,
+                password: password
+            })
+        });
+    } catch (error) {
+        console.error('Error signing up:', error);
+            let errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = 'An error occurred while signing up. Please try again.';
+            errorMessage.style.display = 'block';
+    }
 });

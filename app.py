@@ -3,6 +3,7 @@ import mysql.connector
 from dotenv import load_dotenv
 import random
 import os
+import bcrypt
 
 load_dotenv()
 
@@ -31,6 +32,7 @@ def generate_serial_id():
 
     return ID
 
+#Signing up data sent to database
 @app.route('/api/signup', methods=['POST'])
 def signup():
     data = request.get_json()
@@ -42,17 +44,25 @@ def signup():
         return jsonify({'error': 'Missing required fields'}), 400
     
     ID = generate_serial_id()
+    hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    try:
+        
+        db = get_db()
+        cursor = db.cursor()
 
-    db = get_db()
-    cursor = db.cursor()
+        # Check if user already exists
+        cursor.execute("SELECT id FROM users WHERE email = %s", (email,))
+        if cursor.fetchone():
+            return jsonify({'error': 'User already exists'}), 400
 
-    # Check if user already exists
-    cursor.execute("SELECT id FROM users WHERE email = %s", (email,))
-    if cursor.fetchone():
-        return jsonify({'error': 'User already exists'}), 400
+        # Insert new user
+        cursor.execute("INSERT INTO users (ID, username, email, password) VALUES (%s, %s, %s, %s)", (ID, username, email, hash))
+        db.commit()
 
-    # Insert new user
-    cursor.execute("INSERT INTO users (ID, username, email, password) VALUES (%s, %s, %s, %s)", (ID, username, email, password))
-    db.commit()
-
-    return jsonify({'message': 'User created successfully'}), 201
+        return jsonify({'message': 'User created successfully'}), 201
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'An error occurred while creating the user'}), 500
+    finally:
+        cursor.close()
+        db.close()
