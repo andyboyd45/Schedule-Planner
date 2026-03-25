@@ -8,7 +8,11 @@ import gunicorn
 
 load_dotenv()
 
-app = Flask(__name__, static_folder='public')
+app = Flask(__name__, static_folder='public', static_url_path='/public')
+
+@app.route('/')
+def serve_index():
+    return send_from_directory('public', 'index.html')
 
 # Database connection
 def get_db():
