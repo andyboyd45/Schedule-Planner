@@ -1,0 +1,46 @@
+.form-container{
+    background: var(--secondary-color);
+    border-radius: 18px;
+    padding: 12px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 98%;
+    height: 500px;
+    margin: 10px auto;
+    padding-top: 8%;
+}
+.form-input{
+    border-radius: 50px; /* Adjust based on height */
+    height: 40px;
+    width: 200px;
+    padding: 0 15px; /* Padding for text inside */
+    border: 1px solid #ccc;
+}
+.signup-button{
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 20px; /* Adjust based on height */
+    height: 40px;
+    width: 200px;
+    padding: 0 15px; /* Padding for text inside */
+    border: 1px solid #ccc;
+    align-items: right;    
+}
+.form-group{
+    padding: 2%;
+}
+.login-link{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8pt;
+    color: var(--text-color);
+    margin-top: 10px;
+}
+.error-message{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8pt;
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+    display: none; /* Initially hidden */
+}
+

@@ -22,31 +22,25 @@
         <!-- Text on Right middle-->
         <div class = "form-container">
             
-                <p>Sign Up</p>
+                <p>Log in</p>
         
-            <!-- Sign up -->
-                <form id = "signup-form" method="POST">
+            <!-- Login -->
+                <form id = "login-form" method="POST">
                     <div class = "form-group">
                         <input  type = "text" class = "form-input" name = "username" id="username-input"  placeholder="Username">
                     </div>
                     <div class = "form-group">
-                        <input  type = "email" class = "form-input" name = "email" id="email-input" placeholder="Email">
+                        <input  type = "password" class = "form-input" name = "password" id="password-input" placeholder="Password">
                     </div>
                     <div class = "form-group">
-                        <input  type = "password" class = "form-input" name = "new password" id="password-input" placeholder="Password">
-                    </div>
-                    <div class = "form-group">
-                        <input  type = "password" class = "form-input" name = "confirm password" id="confirm-password-input" placeholder="Confirm Password">
-                    </div>
-                    <div class = "form-group">
-                    <button class = "signup-button" type="submit">Sign Up</button>
+                    <button class = "signup-button" type="submit">Log in</button>
                     </div>
                     <p id = "error-message" class = "error-message"></p>
-                    <p class = "login-link" id = "login-link">Already have an account? <a href="/src/pages/login.html">Login here</a></p>
+                    <p class = "login-link" id = "login-link">Don't have an account? <a href="/src/pages/signup.html">Sign up here</a></p>
                 </form>
             
         </div>     
 
-    <script src="/src/js/signup-form.js" defer></script>
+    <script src="/src/js/login-form.js" defer></script>
 </body>
 </html>

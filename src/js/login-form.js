@@ -9,5 +9,12 @@ form.addEventListener('submit', function(event) {
     console.log('Username:', username);
     console.log('Password:', password);
 
+    if (!username || !password) {
+        let errorMessage = document.getElementById('error-message');
+        errorMessage.textContent = 'Please fill in all fields';
+        errorMessage.style.display = 'block';
+        return;
+    }
+
     //Add function to check if username and password match in database
 });
