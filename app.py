@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 import random
 import os
 import bcrypt
-import gunicorn
 
 load_dotenv()
 
