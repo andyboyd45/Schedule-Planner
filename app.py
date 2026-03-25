@@ -43,12 +43,14 @@ def signup():
     username = data.get('username')
     email = data.get('email')
     password = data.get('password')
+    
+    print(username, email, password)
 
     if not username or not email or not password:
         return jsonify({'error': 'Missing required fields'}), 400
     
     ID = generate_serial_id()
-    hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    hash_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
     try:
         
         db = get_db()
@@ -60,7 +62,7 @@ def signup():
             return jsonify({'error': 'User already exists'}), 400
 
         # Insert new user
-        cursor.execute("INSERT INTO users (ID, username, email, password) VALUES (%s, %s, %s, %s)", (ID, username, email, hash))
+        cursor.execute("INSERT INTO users (ID, username, email, password) VALUES (%s, %s, %s, %s)", (ID, username, email, hash_password))
         db.commit()
 
         return jsonify({'message': 'User created successfully'}), 201
