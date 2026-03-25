@@ -15,6 +15,6 @@ form.addEventListener('submit', function(event) {
         errorMessage.style.display = 'block';
         return;
     }
-
+    
     //Add function to check if username and password match in database
 });
