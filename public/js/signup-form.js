@@ -9,11 +9,6 @@ signup_form.addEventListener('submit', async function(event) {
     const password = document.getElementById('password-input').value;
     const confirmPassword = document.getElementById('confirm-password-input').value;
 
-    console.log('Username:', username);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Confirm Password:', confirmPassword);
-
     if (!username || !email || !password || !confirmPassword) {
         let errorMessage = document.getElementById('error-message');
         errorMessage.textContent = 'Please fill in all fields';
@@ -26,6 +21,8 @@ signup_form.addEventListener('submit', async function(event) {
         errorMessage.style.display = 'block';
         return;
     }
+
+    console.log("info received");
 
     //Still need to add function to send data to backend and store in SQL database
     try{
