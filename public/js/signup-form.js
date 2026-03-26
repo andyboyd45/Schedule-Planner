@@ -21,6 +21,12 @@ signup_form.addEventListener('submit', async function(event) {
         errorMessage.style.display = 'block';
         return;
     }
+    else if(password.length <= 8){
+        let errorMessage = document.getElementById('error-message');
+        errorMessage.textContent = 'Password must be at least 8 characters long';
+        errorMessage.style.display = 'block';
+        return;
+    }
 
     console.log("info received");
 
