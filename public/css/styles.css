@@ -106,6 +106,116 @@ body{
     font-size: 14px;
     line-height: 1.5;
 }
+
+.form-container{
+    background: var(--secondary-color);
+    border-radius: 18px;
+    padding: 12px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 98%;
+    height: 500px;
+    margin: 10px auto;
+    padding-top: 8%;
+}
+.form-input{
+    border-radius: 50px; /* Adjust based on height */
+    height: 40px;
+    width: 200px;
+    padding: 0 15px; /* Padding for text inside */
+    border: 1px solid #ccc;
+}
+.signup-button{
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 20px; /* Adjust based on height */
+    height: 40px;
+    width: 200px;
+    padding: 0 15px; /* Padding for text inside */
+    border: 1px solid #ccc;
+    align-items: right;    
+}
+.form-group{
+    padding: 2%;
+}
+.login-link{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8pt;
+    color: var(--text-color);
+    margin-top: 10px;
+}
+.error-message{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8pt;
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+    display: none; /* Initially hidden */
+}
+
+.calendar-header{
+    background: var(--secondary-color);
+    border-radius: 18px;
+    padding: 12px 22px;
+    display: flex;
+    align-items: center;
+    width: 98%;
+    margin: 10px auto;
+}
+
+.m{
+    margin-right: 10px;
+}
+.y{
+    margin-right: 20px;
+}
+.pr{
+    margin-right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer; 
+}
+.nxt{
+    margin-right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;    
+}
+
+.calendar{
+    background-color: #ffffff;
+    background-position: center;
+    border-radius: 18px;
+    padding: 12px 22px;
+    width: 98%;
+    margin: 10px auto;
+}
+
+.calendar td{
+    border: 1px solid #e0e0e0;
+    vertical-align: top;
+    height: 100px;
+    width: 14.28%;   /* 100% / 7 days */
+    padding: 6px 8px;
+    font-size: 13px;   
+    border-collapse: collapse
+}
+
+.date_cell{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.calendar td.empty{
+    border: none;
+}
+.add-event-btn{
+    background: none;
+    border: none;
+    cursor: pointer;     
+}
+
 /* Responsive Design --- Need to change and clean up */
 @media (max-width: 768px) {
     header{

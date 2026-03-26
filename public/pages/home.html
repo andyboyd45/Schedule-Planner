@@ -3,9 +3,38 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Schedule Planner</title>
+        <title>home</title>
+        <link rel="stylesheet" href="/public/css/styles.css">
     </head>
     <body>
-        NOTHING TO SEE YET, WORKING ON IT DONT WORRY 
+        <header class = 'page-header'>
+            <div class="logo">
+                <span class="logo-icon"></span>
+                <span class="logo-text">Schedule Planner</span>
+            </div>
+            <nav class = "top-links">
+                <a href="#" name = "account">ACCOUNT</a>
+                <a href="#" name = "settings">SETTINGS</a>
+
+            </nav>
+            <nav class="nav-links">
+                <a href="/public/index.html" class="home-button" name="home">HOME</a>
+            </nav>
+        </header>
+
+        <div class = "calendar-header">
+            <p id = "month" class = 'm'>Month-placeholder</p>
+            <p id = "year" class = 'y'>Year-placeholder</p>
+
+            <button id="prev" class = "pr"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg></button>
+            <button id="next" class = "nxt"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg></button>
+        </div>
+
+        <table class = "calendar" id = 'calendar_id'>
+            <thead id = "cal_header"></thead>
+            <tbody id = "cal_body"></tbody>
+        </table>
+
+        <script src="/public/js/calendar.js" defer></script>
     </body>
 </html>
