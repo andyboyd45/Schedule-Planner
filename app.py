@@ -36,7 +36,15 @@ def generate_serial_id():
 
     return ID
 
-#Signing up data sent to database
+#Hashing password using bcrypt
+def create_hashed_password(password):
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+#Verifying password using bcrypt
+def verify_password(password, hashed):
+    return bcrypt.checkpw(password.encode('utf-8'), hashed)
+
+#Sign up data sent to database
 @app.route('/api/signup', methods=['POST'])
 def signup():
     data = request.get_json()
@@ -44,13 +52,8 @@ def signup():
     email = data.get('email')
     password = data.get('password')
     
-    print(username, email, password)
-
-    if not username or not email or not password:
-        return jsonify({'error': 'Missing required fields'}), 400
-    
     ID = generate_serial_id()
-    hash_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    hash_password = create_hashed_password(password)
     try:
         
         db = get_db()
@@ -72,6 +75,43 @@ def signup():
     finally:
         cursor.close()
         db.close()
+
+@app.route('/api/login', methods=['GET'])
+def login():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+    
+    try:
+        db = get_db()
+        cursor = db.cursor()
+        
+        #Finding user in database
+        cursor.execute("SELECT password FROM users WHERE username = %s", (username,))
+        if cursor.fetchone() is None:
+            return jsonify({'error': 'User not found'}), 404
+        
+
+        hash_password = cursor.fetchone()[0]
+        
+        #Check password is correct
+        if verify_password(password, hash_password):
+            #TODO: Send User's Planner data to frontend upon successful login
+            return jsonify({'message': 'Login successful'}), 200 
+        else:
+            return jsonify({'error': 'Invalid password'}), 401
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'PYTHON ERROR: An error occurred while logging in'}), 500
+    
+    finally:
+        cursor.close()
+        db.close()
+        
+        
+    
+    
+    
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 8080))
