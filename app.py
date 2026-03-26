@@ -76,7 +76,7 @@ def signup():
         cursor.close()
         db.close()
 
-@app.route('/api/login', methods=['GET'])
+@app.route('/api/login', methods=['POST'])
 def login():
     data = request.get_json()
     username = data.get('username')
