@@ -90,11 +90,9 @@ def login():
         
         #Finding user in database
         cursor.execute("SELECT password FROM users WHERE username = %s", (username,))
-        if not cursor.fetchone():
+        hash_password = cursor.fetchone()
+        if not hash_password: #Couldn't find password for username
             return jsonify({'error': 'User not found'}), 404
-        
-
-        hash_password = cursor.fetchone()[0]
         
         #Check password is correct
         if verify_password(password, hash_password):
