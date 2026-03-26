@@ -42,7 +42,7 @@ def create_hashed_password(password):
 
 #Verifying password using bcrypt
 def verify_password(password, hashed):
-    return bcrypt.checkpw(password.encode('utf-8'), hashed)
+    return bcrypt.checkpw(password.encode('utf-8'), hashed.encode('utf-8'))
 
 #Sign up data sent to database
 #TODO: Check if username is already takedn and send and error message
