@@ -53,7 +53,7 @@ def signup():
     email = data.get('email')
     password = data.get('password')
     
-    ID = generate_serial_id()
+    ID_user = generate_serial_id()
     hash_password = create_hashed_password(password)
     try:
         
@@ -65,8 +65,13 @@ def signup():
         if cursor.fetchone():
             return jsonify({'error': 'User already exists'}), 400
 
-        # Insert new user
-        cursor.execute("INSERT INTO users (ID, username, email, password) VALUES (%s, %s, %s, %s)", (ID, username, email, hash_password))
+        # Insert new user into users database
+        cursor.execute("INSERT INTO users (ID, username, email, password) VALUES (%s, %s, %s, %s)", (ID_user, username, email, hash_password))
+        db.commit()
+        
+        #Insert new user into planner database with default values
+        ID_planner = generate_serial_id()
+        cursor.execute("INSERT INTO planner (ID, user_ID, planner_data) VALUES (%s, %s, %s)", (ID_planner, ID_user, '{}'))
         db.commit()
 
         return jsonify({'message': 'User created successfully'}), 201
@@ -110,8 +115,7 @@ def login():
     finally:
         cursor.close()
         db.close()
-        
-        
+           
     
     
     

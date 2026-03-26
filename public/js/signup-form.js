@@ -30,7 +30,6 @@ signup_form.addEventListener('submit', async function(event) {
 
     console.log("info received");
 
-    //Still need to add function to send data to backend and store in SQL database
     try{
         const response = await fetch('/api/signup', {
             method: 'POST',

@@ -6,8 +6,6 @@ form.addEventListener('submit', async function(event) {
     const username = document.getElementById('username-input').value.trim();
     const password = document.getElementById('password-input').value;
 
-    console.log('Username:', username);
-    console.log('Password:', password);
 
     if (!username || !password) {
         let errorMessage = document.getElementById('error-message');
@@ -15,6 +13,8 @@ form.addEventListener('submit', async function(event) {
         errorMessage.style.display = 'block';
         return;
     }
+
+    console.log("info received");
 
     try{
         const response = await fetch('/api/login', {
@@ -29,7 +29,7 @@ form.addEventListener('submit', async function(event) {
         });
 
         const data = await response.json();
-        
+
         console.log('Response status:', response.status);
         console.log('Response data:', data);
 
@@ -50,7 +50,4 @@ form.addEventListener('submit', async function(event) {
         errorMessage.style.display = 'block';        
     }
 
-
-    
-    //Add function to check if username and password match in database
 });
