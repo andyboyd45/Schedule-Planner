@@ -29,6 +29,7 @@ form.addEventListener('submit', async function(event) {
         });
 
         const data = await response.json();
+        
         console.log('Response status:', response.status);
         console.log('Response data:', data);
 

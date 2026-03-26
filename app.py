@@ -45,6 +45,7 @@ def verify_password(password, hashed):
     return bcrypt.checkpw(password.encode('utf-8'), hashed)
 
 #Sign up data sent to database
+#TODO: Check if username is already takedn and send and error message
 @app.route('/api/signup', methods=['POST'])
 def signup():
     data = request.get_json()
@@ -76,6 +77,7 @@ def signup():
         cursor.close()
         db.close()
 
+#Login data verified with data and send user schedule data to frontend
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -88,7 +90,7 @@ def login():
         
         #Finding user in database
         cursor.execute("SELECT password FROM users WHERE username = %s", (username,))
-        if cursor.fetchone() is None:
+        if not cursor.fetchone():
             return jsonify({'error': 'User not found'}), 404
         
 
