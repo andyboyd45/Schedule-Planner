@@ -242,19 +242,18 @@ function displayPlanner(events){
         const[eventYear, eventMonth, eventDay] = key.split('-').map(Number);
 
         if (!eventList){
-            console.error("Missing event list for:", dateKey);
-            return;
+            continue;
         }
         if(eventYear !== yr || eventMonth !== mon+1){
             continue;
         }
 
+        eventList.innerHTML = '';
         //Display name of each event
         events[key].array.forEach(event => {
             const li = document.createElement('li');
             li.textContent = event.name;
             li.classList.add('event-item');
-
             eventList.appendChild(li);
         });
     }
