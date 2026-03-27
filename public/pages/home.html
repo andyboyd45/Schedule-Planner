@@ -35,6 +35,41 @@
             <tbody id = "cal_body"></tbody>
         </table>
 
+        <!-- Overlay -->
+        <div id="overlay" class="overlay"></div>
+
+        <!-- Popup form -->
+        <div id="event-form" class="event-form">
+            <h3 id = "event-title">Add Event</h3>
+
+            <label>Name</label>
+            <input type="text" id="event-name" placeholder="Event name">
+
+            <label>Description</label>
+            <input type="text" id="event-description" placeholder="Description">
+
+            <label>Type</label>
+            <select id="event-type">
+                <option value="work">Work</option>
+                <option value="health">Health</option>
+                <option value="fitness">Fitness</option>
+                <option value="personal">Personal</option>
+            </select>
+
+            <label>Start Time</label>
+            <input type="time" id="event-start">
+
+            <label>End Time</label>
+            <input type="time" id="event-end">
+
+            <p id = "error-message" class = "error-message"></p>
+
+            <div class="form-buttons">
+                <button id="cancel-btn">Cancel</button>
+                <button id="save-btn">Save</button>
+            </div>
+        </div>
+
         <script src="/public/js/calendar.js" defer></script>
     </body>
 </html>

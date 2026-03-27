@@ -1,13 +1,16 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, session
 import mysql.connector
 from dotenv import load_dotenv
 import random
 import os
 import bcrypt
+import json
 
 load_dotenv()
 
 app = Flask(__name__, static_folder='public', static_url_path='/public')
+
+app.secret_key = os.getenv('SECRET_KEY')
 
 @app.route('/')
 def serve_index():
@@ -91,20 +94,21 @@ def login():
     
     try:
         db = get_db()
-        cursor = db.cursor()
+        cursor = db.cursor(dictionary=True)
         
-        cursor.execute("SELECT username FROM users WHERE username = %s", (username,))
-        if not cursor.fetchone():
+        #grabs info
+        user = cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+        #Finding user in database
+        if not user:
             return jsonify({'error': 'User not found'}), 404
 
         #Finding user in database
-        cursor.execute("SELECT password FROM users WHERE username = %s", (username,))
-        hash_password = cursor.fetchone()[0]
+        hash_password = user['password']
 
         
         #Check password is correct
         if verify_password(password, hash_password):
-            #TODO: Send User's Planner data to frontend upon successful login
+            session['user_id'] = user['ID']
             return jsonify({'message': 'Login successful'}), 200 
         else:
             return jsonify({'error': 'Invalid password'}), 401
@@ -115,6 +119,55 @@ def login():
     finally:
         cursor.close()
         db.close()
+
+@app.route('/api/planner_data', methods=['GET'])
+def planner_data():
+    if 'user_id' not in session:
+        return jsonify({'error': 'User Not logged in'}), 401
+    
+    user_id = session['user_id']
+    
+    try:
+        db = get_db()
+        cursor = db.cursor(dictionary=True)
+        
+        user = cursor.execute('SELECT * FROM planner WHERE user_ID = %s',(user_id,))
+        
+        return jsonify({
+            'planner_data' : json.loads(user['planner_data'])
+        }), 200
+        
+        
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'Server side error'}), 500
+    finally:
+        cursor.close()
+        db.close
+
+@app.route('/api/save', methods=['POST'])
+def save_planner_data():
+    data = request.get_json()
+    planner = data.get('planner_data')
+    
+    user_id = session['user_id']
+    
+    try:
+        db = get_db()
+        cursor = db.cursor()
+        
+        cursor.execute('UPDATE planner SET planner_data = %s WHERE user_ID = %s',(planner,user_id))
+        db.commit()
+        
+        return jsonify({'message':'Data uploaded successfuly'}), 201
+    
+    except Exception as e:
+        return jsonify({'error': 'PYTHON ERROR: An error occurred while sending data'}), 500
+    finally:
+        cursor.close()
+        db.close()
+        
+        
            
     
     

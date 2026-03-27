@@ -216,6 +216,79 @@ body{
     cursor: pointer;     
 }
 
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+}
+
+.event-form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    width: 320px;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.event-form h3 {
+    margin: 0 0 16px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.event-form label {
+    display: block;
+    font-size: 13px;
+    color: #888;
+    margin: 10px 0 4px;
+}
+
+.event-form input,
+.event-form select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.form-buttons button {
+    flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#save-btn {
+    background: #1a73e8;
+    color: white;
+    border: none;
+}
+
+#save-btn:hover {
+    background: #1558b0;
+}
+
 /* Responsive Design --- Need to change and clean up */
 @media (max-width: 768px) {
     header{
