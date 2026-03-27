@@ -94,7 +94,7 @@ def login():
     
     try:
         db = get_db()
-        cursor = db.cursor(dictionary=True)
+        cursor = db.cursor(dictionary=True, buffered=True)
         
         #grabs info
         user = cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
