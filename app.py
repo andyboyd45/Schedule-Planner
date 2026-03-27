@@ -98,6 +98,7 @@ def login():
         
         #grabs info
         user = cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+        user = cursor.fetchone()
         #Finding user in database
         if not user:
             return jsonify({'error': 'User not found'}), 404
