@@ -181,7 +181,7 @@ save_btn.addEventListener('click', async function(event){
         };
 
         const Eventyear = selectedDate.getFullYear();
-        const Eventmonth = selectedDate.getMonth();
+        const Eventmonth = selectedDate.getMonth()+1;
         const Eventday = selectedDate.getDate();
         const dateKey = Eventyear+"-"+Eventmonth+"-"+Eventday;
 
