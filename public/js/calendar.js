@@ -183,9 +183,13 @@ save_btn.addEventListener('click', async function(event){
         const Eventyear = selectedDate.getFullYear();
         const Eventmonth = selectedDate.getMonth();
         const Eventday = selectedDate.getDate();
-        const dateKey = Eventyear+"-"+Eventmonth+"-"+Eventday
+        const dateKey = Eventyear+"-"+Eventmonth+"-"+Eventday;
 
         console.log(Eventmonth);
+
+        if(!planner[dateKey]){
+            planner[dateKey] = []; 
+        }
 
         planner[dateKey].push(event);
 
