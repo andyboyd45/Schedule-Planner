@@ -149,7 +149,7 @@ def planner_data():
 @app.route('/api/save', methods=['POST'])
 def save_planner_data():
     data = request.get_json()
-    planner = data.get('planner_data')
+    planner = json.dumps(data.get('planner_data'))
     
     user_id = session['user_id']
     
@@ -163,7 +163,7 @@ def save_planner_data():
         return jsonify({'message':'Data uploaded successfuly'}), 201
     
     except Exception as e:
-        return jsonify({'error': 'PYTHON ERROR: An error occurred while sending data'}), 500
+        return jsonify({'error': str(e)}), 500
     finally:
         cursor.close()
         db.close()
