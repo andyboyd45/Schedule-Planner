@@ -132,8 +132,8 @@ def planner_data():
         db = get_db()
         cursor = db.cursor(dictionary=True)
         
-        user = cursor.execute('SELECT * FROM planner WHERE user_ID = %s',(user_id,))
-        
+        cursor.execute('SELECT * FROM planner WHERE user_ID = %s',(user_id,))
+        user = cursor.fetchone()
         return jsonify({
             'planner_data' : json.loads(user['planner_data'])
         }), 200

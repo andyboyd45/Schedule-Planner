@@ -292,19 +292,20 @@ async function savePlanner(){
 async function getPlanner(){
     try{
         const response = await fetch('/api/planner_data');
-        const data = await response.json();
+        const text = await response.text();
+
+        console.log('RAW RESPONSE: ', text);
 
         if(response.ok){
-            const planner = data.planner_data;
+            const planner = text.planner_data;
             console.log("data loaded successfully");
+            console.log(planner);
             return planner;
         }
-        else{
-            console.error(data.error);
-            return {};
-        }
+
     }catch(error){
         console.error('Error:',error);
+        console.log("Could not retrieve data");
         return {};
     }    
 }
