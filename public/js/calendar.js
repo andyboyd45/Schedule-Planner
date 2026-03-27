@@ -297,7 +297,9 @@ async function getPlanner(){
         console.log('RAW RESPONSE: ', text);
 
         if(response.ok){
-            const planner = text.planner_data;
+            const data = await response.json();
+
+            const planner = data.planner_data;
             console.log("data loaded successfully");
             console.log(planner);
             return planner;
