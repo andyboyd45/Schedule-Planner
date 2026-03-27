@@ -48,7 +48,6 @@ def verify_password(password, hashed):
     return bcrypt.checkpw(password.encode('utf-8'), hashed.encode('utf-8'))
 
 #Sign up data sent to database
-#TODO: Check if username is already takedn and send and error message
 @app.route('/api/signup', methods=['POST'])
 def signup():
     data = request.get_json()
@@ -67,6 +66,10 @@ def signup():
         cursor.execute("SELECT ID FROM users WHERE email = %s", (email,))
         if cursor.fetchone():
             return jsonify({'error': 'User already exists'}), 400
+        
+        cursor.execute("SELECT username FROM users WHERE username = %s", (username,))
+        if cursor.fetchone():
+            return jsonify({'error': 'Username already taken'}),401
 
         # Insert new user into users database
         cursor.execute("INSERT INTO users (ID, username, email, password) VALUES (%s, %s, %s, %s)", (ID_user, username, email, hash_password))
@@ -97,7 +100,7 @@ def login():
         cursor = db.cursor(dictionary=True, buffered=True)
         
         #grabs info
-        user = cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+        cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
         user = cursor.fetchone()
         #Finding user in database
         if not user:
@@ -121,6 +124,7 @@ def login():
         cursor.close()
         db.close()
 
+#Send user's planner data to page
 @app.route('/api/planner_data', methods=['GET'])
 def planner_data():
     if 'user_id' not in session:
@@ -146,6 +150,7 @@ def planner_data():
         cursor.close()
         db.close
 
+#Get user's new planner data
 @app.route('/api/save', methods=['POST'])
 def save_planner_data():
     data = request.get_json()
