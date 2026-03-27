@@ -292,9 +292,9 @@ async function savePlanner(){
 async function getPlanner(){
     try{
         const response = await fetch('/api/planner_data');
-        const text = await response.text();
+        //const text = await response.text();
 
-        console.log('RAW RESPONSE: ', text);
+        //console.log('RAW RESPONSE: ', text);
 
         if(response.ok){
             const data = await response.json();
