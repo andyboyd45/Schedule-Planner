@@ -73,7 +73,7 @@ function create_cal_body(){
                 td.classList.add('empty');
             }
             else{
-                td.id = yr + "-" + mon + "-" + day;
+                td.id = yr + "-" + (mon+1) + "-" + day;
 
                 const date_cell = document.createElement('div');
                 date_cell.classList.add('date_cell');
@@ -81,7 +81,7 @@ function create_cal_body(){
                 td.appendChild(date_cell);
 
                 const eventList = document.createElement('ul');
-                eventList.id = "events-"+yr + "-" + mon + "-" + day;
+                eventList.id = "events-"+yr + "-" + (mon+1) + "-" + day;
                 eventList.classList.add('event-list');
                 td.appendChild(eventList);
 
@@ -241,7 +241,10 @@ function displayPlanner(events){
         const eventList = document.getElementById('events-'+key);
         const[eventYear, eventMonth, eventDay] = key.split('-').map(Number);
 
-        if (!eventList) continue;
+        if (!eventList){
+            console.error("Missing event list for:", dateKey);
+            return;
+        }
         if(eventYear !== yr || eventMonth !== mon+1){
             continue;
         }
