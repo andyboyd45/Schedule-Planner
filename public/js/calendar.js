@@ -62,7 +62,7 @@ function create_cal_body(){
     
     tbody.innerHTML = ''; //Refreshes list
 
-    for (let row = 0; row < 5; row++) {       // 5 rows
+    for (let row = 0; row < 6; row++) {       // 5 rows
         const tr = document.createElement('tr');
         
         for (let col = 0; col < 7; col++) {   // 7 columns
