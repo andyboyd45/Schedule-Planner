@@ -250,7 +250,7 @@ function displayPlanner(events){
 
         eventList.innerHTML = '';
         //Display name of each event
-        events[key].array.forEach(event => {
+        events[key].forEach(event => {
             const li = document.createElement('li');
             li.textContent = event.name;
             li.classList.add('event-item');
