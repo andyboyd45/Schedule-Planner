@@ -283,7 +283,7 @@ async function edit_event(event, item){
     }
     
     await savePlanner();
-    document.getElementById(data.date + '-' + data.id).textContent = event_name;
+    displayPlanner(planner);
     closeForm();
     
 }
