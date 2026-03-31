@@ -420,7 +420,7 @@ document.addEventListener('DOMContentLoaded', async function(){
     //Event listener for each event item on the calendar
     document.querySelectorAll('.event-item').forEach(item => {
     item.addEventListener('click',function(){
-        console.log("Event button works");
+        showForm(null, "edit", item);
         });
     });
 });
