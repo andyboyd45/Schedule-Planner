@@ -113,6 +113,7 @@ def login():
         #Check password is correct
         if verify_password(password, hash_password):
             session['user_id'] = user['ID']
+            session['username'] = username
             return jsonify({'message': 'Login successful'}), 200 
         else:
             return jsonify({'error': 'Invalid password'}), 401
@@ -131,6 +132,7 @@ def planner_data():
         return jsonify({'error': 'User Not logged in'}), 401
     
     user_id = session['user_id']
+    username = session['username']
     
     try:
         db = get_db()
@@ -139,7 +141,8 @@ def planner_data():
         cursor.execute('SELECT * FROM planner WHERE user_ID = %s',(user_id,))
         user = cursor.fetchone()
         return jsonify({
-            'planner_data' : json.loads(user['planner_data'])
+            'planner_data' : json.loads(user['planner_data']),
+            'username': username
         }), 200
         
         

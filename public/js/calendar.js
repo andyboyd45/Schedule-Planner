@@ -287,6 +287,7 @@ async function save_event(event){
             type : event_type,
             start : event_start,
             end : event_end,
+            id : null
         };
 
         const Eventyear = selectedDate.getFullYear();
@@ -301,6 +302,9 @@ async function save_event(event){
         }
 
         planner[dateKey].push(data);
+        id = planner[dateKey].length - 1;
+
+        data.id = id;
 
         const eventList = document.getElementById("events-" + dateKey);
 
@@ -367,8 +371,14 @@ function displayPlanner(events){
         }
 
         eventList.innerHTML = '';
+        count = 1;
         //Display name of each event
         events[key].forEach(event => {
+            if(event.id === null){
+                event.id = count;
+                count ++;
+            }
+
             const li = document.createElement('li');
             li.textContent = event.name;
             li.classList.add('event-item');
@@ -427,6 +437,7 @@ async function getPlanner(){
             const data = await response.json();
 
             const planner = data.planner_data;
+            document.getElementById('welcome-message').textContent = "Welcome, " + data.username + "!";
             console.log("data loaded successfully");
             console.log(planner);
             return planner;
@@ -442,11 +453,10 @@ async function getPlanner(){
 function reloadEventItems(){
     //Event listener for each event item on the calendar
     document.querySelectorAll('.event-item').forEach(item => {
-    item.addEventListener('click',function(){
-        showForm(null, "edit", item);
-        });
+        addEventListener(item);
     });    
 }
+
 function addEventListener(item){
     item.addEventListener('click',function(){
         showForm(null, "edit", item);
@@ -454,7 +464,6 @@ function addEventListener(item){
 }
 
 document.addEventListener('DOMContentLoaded', async function(){
-
     set_header();
     create_monthly_view_H();
     create_monthly_view_B();
