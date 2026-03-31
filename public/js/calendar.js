@@ -44,6 +44,12 @@ const format_st = [1,21,31];
 const format_nd = [2, 22];
 const format_rd = [3, 23];
 
+function replaceButton(btn){
+    const newBtn = btn.cloneNode(true);
+    btn.parentNode.replaceChild(newBtn, btn);
+    return newBtn;
+}
+
 /**Set Month and year at the top of the planner */
 function set_header(){
     month.textContent = monthNames[mon];
