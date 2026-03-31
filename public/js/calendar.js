@@ -406,6 +406,7 @@ function displayPlanner(events){
             }
 
             const li = document.createElement('li');
+            li.id = key + '-' + event.id;
             li.textContent = event.name;
             li.classList.add('event-item');
             li.dataset.eventData = JSON.stringify(event); // Store event data in a data attribute
