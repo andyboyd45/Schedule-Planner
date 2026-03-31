@@ -47,9 +47,13 @@ const format_nd = [2, 22];
 const format_rd = [3, 23];
 
 function replaceButton(btn){
+    try{
     const newBtn = btn.cloneNode(true);
     btn.parentNode.replaceChild(newBtn, btn);
     return newBtn;
+    }catch(error){
+        return null;
+    }
 }
 
 /**Set Month and year at the top of the planner */
@@ -304,6 +308,7 @@ async function save_event(event){
         li.textContent = event_name;
         li.classList.add('event-item');
         li.dataset.eventData = JSON.stringify(data); // Store event data in a data attribute
+        addEventListener(li);
         eventList.appendChild(li);
 
         
@@ -326,7 +331,8 @@ prev.addEventListener('click', function() {
     }
     set_header();   
     create_monthly_view_B();
-    displayPlanner(planner); 
+    displayPlanner(planner);
+    reloadEventItems();
 
 });
 
@@ -340,6 +346,7 @@ next.addEventListener('click', function() {
     set_header();   
     create_monthly_view_B(); 
     displayPlanner(planner);
+    reloadEventItems();
 
 });
 
@@ -432,6 +439,20 @@ async function getPlanner(){
     }    
 }
 
+function reloadEventItems(){
+    //Event listener for each event item on the calendar
+    document.querySelectorAll('.event-item').forEach(item => {
+    item.addEventListener('click',function(){
+        showForm(null, "edit", item);
+        });
+    });    
+}
+function addEventListener(item){
+    item.addEventListener('click',function(){
+        showForm(null, "edit", item);
+        });
+}
+
 document.addEventListener('DOMContentLoaded', async function(){
 
     set_header();
@@ -439,11 +460,5 @@ document.addEventListener('DOMContentLoaded', async function(){
     create_monthly_view_B();
     planner = await getPlanner();
     displayPlanner(planner);
-
-    //Event listener for each event item on the calendar
-    document.querySelectorAll('.event-item').forEach(item => {
-    item.addEventListener('click',function(){
-        showForm(null, "edit", item);
-        });
-    });
+    reloadEventItems();
 });
