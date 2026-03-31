@@ -188,7 +188,22 @@ function showForm(date = null, mode = "add", item=null){
         document.getElementById('overlay').style.display = 'block';
         document.getElementById('event-form').style.display = 'block';
         let format = dateFormat(selectedDate);
-        event_title.textContent = "Add Event for " + format;        
+        event_title.textContent = "Add Event for " + format;     
+        
+        save_btn = replaceButton(save_btn);
+        cancel_btn = replaceButton(cancel_btn);
+
+        save_btn.textContent = "Save Event";
+        cancel_btn.textContent = "Cancel";
+
+        //button to close form
+        cancel_btn.addEventListener('click', closeForm);
+
+        //button to save event into database and display on calendar
+        save_btn.addEventListener('click', save_event);
+
+
+
     }
     else if(mode === "edit" && item){
         document.getElementById('overlay').style.display = 'block';
@@ -241,11 +256,11 @@ function closeForm(){
     document.getElementById('event-end').value = '';
 }
 
-//button to close form
-cancel_btn.addEventListener('click', closeForm);
-
-//button to save event into database and display on calendar
-save_btn.addEventListener('click', async function(event){
+/**
+ * Saves data into planner variable and sends it to the server to be stored into the database
+ * @param {*} event 
+ */
+async function save_event(event){
     event.preventDefault();
 
     const event_name = document.getElementById('event-name').value;
@@ -297,8 +312,8 @@ save_btn.addEventListener('click', async function(event){
             console.log("Event will be used for current session but not for future sessions");
         }
         closeForm();      
-    }
-});
+    }    
+}
 
 //Go back one month
 prev.addEventListener('click', function() {
