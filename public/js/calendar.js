@@ -232,9 +232,8 @@ function showForm(date = null, mode = "add", item=null){
         edit_btn.textContent = "Save Edit";
         delete_btn.textContent = "Delete Event";
 
-        edit_btn.addEventListener('click', function(){
-            console.log("Save edit works");
-            closeForm();
+        edit_btn.addEventListener('click', function(event){
+            edit_event(event, item=item);
         });
         delete_btn.addEventListener('click', function(){
             console.log("Delete event works");
@@ -262,6 +261,32 @@ function closeForm(){
     document.getElementById('event-end').value = '';
 }
 
+async function edit_event(event, item){
+    event.preventDefault();
+
+    const data = JSON.parse(item.dataset.eventData);
+
+    const event_name = document.getElementById('event-name').value;
+    const event_description = document.getElementById('event-description').value;
+    const event_type = document.getElementById('event-type').value;
+    const event_start = document.getElementById('event-start').value;
+    const event_end = document.getElementById('event-end').value; 
+
+    planner[data.date][data.id] = {
+            name : event_name,
+            description : event_description,
+            type : event_type,
+            start : event_start,
+            end : event_end,
+            id : data.id,
+            date : data.date        
+    }
+    
+    await savePlanner();
+    closeForm();
+    
+}
+
 /**
  * Saves data into planner variable and sends it to the server to be stored into the database
  * @param {*} event 
@@ -287,7 +312,8 @@ async function save_event(event){
             type : event_type,
             start : event_start,
             end : event_end,
-            id : null
+            id : null,
+            date : null
         };
 
         const Eventyear = selectedDate.getFullYear();
@@ -295,16 +321,14 @@ async function save_event(event){
         const Eventday = selectedDate.getDate();
         const dateKey = Eventyear+"-"+Eventmonth+"-"+Eventday;
 
-        console.log(Eventmonth);
+        data['date'] = dateKey;
 
-        if(!planner[dateKey]){
-            planner[dateKey] = []; 
-        }
+        if(!planner[dateKey]){planner[dateKey] = [];}
 
         planner[dateKey].push(data);
         id = planner[dateKey].length - 1;
 
-        data.id = id;
+        data['id'] = id;            
 
         const eventList = document.getElementById("events-" + dateKey);
 
