@@ -374,10 +374,6 @@ function displayPlanner(events){
         count = 1;
         //Display name of each event
         events[key].forEach(event => {
-            if(event.id === null){
-                event.id = count;
-                count ++;
-            }
 
             const li = document.createElement('li');
             li.textContent = event.name;
