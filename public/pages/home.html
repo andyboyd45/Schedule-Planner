@@ -21,19 +21,34 @@
                 <a href="/public/index.html" class="home-button" name="home">HOME</a>
             </nav>
         </header>
-
         <div class = "calendar-header">
-            <p id = "month" class = 'm'>Month-placeholder</p>
-            <p id = "year" class = 'y'>Year-placeholder</p>
+            <div class = "date">
+                <p id = "month" class = 'm'>Month-placeholder</p>
+                <p id = "year" class = 'y'>Year-placeholder</p>
 
-            <button id="prev" class = "pr"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg></button>
-            <button id="next" class = "nxt"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg></button>
+                <button id="prev" class = "pr"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg></button>
+                <button id="next" class = "nxt"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg></button>
+            </div>
+            <div class = 'view'>
+                <div class = 'view-type'>   
+                    <label>Calendar View Type</label>
+                    <select class = 'view-select'>
+                        <option value="work">Monthly</option>
+                        <option value="work">Weekly</option>
+                    </select>                    
+                </div>
+                <div class = 'view-message'>
+                    <p class = 'Message' id = 'welcome-message'> Welcome back User </p>
+                </div>
+            </div>
+            
         </div>
 
         <table class = "calendar" id = 'calendar_id'>
             <thead id = "cal_header"></thead>
             <tbody id = "cal_body"></tbody>
         </table>
+
 
         <!-- Overlay -->
         <div id="overlay" class="overlay"></div>
