@@ -1,6 +1,22 @@
+/**
+ * TODO:
+ * edit/delete events
+ * Event categories with colors
+ * Responsive mobile layout
+ * Add weekly calendar view
+ * allow users to add event types
+ * Drag and drop events(Complex and can be done last)
+ */
+
+//Tody's date info used as a default when the calendar is loaded up
 const today = new Date();
-let yr = today.getFullYear();
-let mon = today.getMonth();
+const year_to_date = today.getFullYear();
+const month_to_date = today.getMonth();
+const day_to_date = today.getDate();
+
+//INIT variables
+let yr = year_to_date;
+let mon = month_to_date;
 let selectedDate = null;
 let planner = {};
 
@@ -23,19 +39,22 @@ let save_btn = document.getElementById('save-btn');
 
 //Constants
 const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const dayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const dayNames = ["Sun","Mon","Tues","Wed","Thur","Fri","Sat"];
 const format_st = [1,21,31];
 const format_nd = [2, 22];
 const format_rd = [3, 23];
 
-//Setting Month and Year at the top of planner
+/**Set Month and year at the top of the planner */
 function set_header(){
     month.textContent = monthNames[mon];
     year.textContent = yr;
 }
 
-//Setting Weeks
-function create_cal_header(){
+
+/**
+ * Create monthly view header with day names
+ */
+function create_monthly_view_H(){
     const tr = document.createElement('tr');
     for(const day in dayNames){
         const th = document.createElement('th');
@@ -45,24 +64,25 @@ function create_cal_header(){
     thead.appendChild(tr)
 }
 
-//REMEMBER: td id = yr-mon-day
 /**
- * How we want the format of td id
- * button (add events)
- * list of events
  * td.id = 'empty-'+row+'-'+col //FOR EMPTY CELLS
  * td.id = year-month-day
  * eventList.id = events-year-month-day
- * 
+ * add one to month because system's month index is 0-11 and it's easier to read in database as 1-12
  */
-function create_cal_body(){
+
+/**
+ * Create monthly view body with days and events listed
+ * Also creates each day id, event id, buttons to add events to a specific day
+ */
+function create_monthly_view_B(){
     const firstday = new Date(yr, mon, 1).getDay();
     const daysInMonth = new Date(yr, mon+1,0).getDate();
     let day = 1;
     
     tbody.innerHTML = ''; //Refreshes list
 
-    for (let row = 0; row < 6; row++) {       // 5 rows
+    for (let row = 0; row < 6; row++) {       // 6 rows
         const tr = document.createElement('tr');
         
         for (let col = 0; col < 7; col++) {   // 7 columns
@@ -77,8 +97,20 @@ function create_cal_body(){
 
                 const date_cell = document.createElement('div');
                 date_cell.classList.add('date_cell');
-                date_cell.textContent = day;
                 td.appendChild(date_cell);
+
+                const p = document.createElement('p');
+                p.textContent = day;
+                p.classList.add('day');
+                date_cell.appendChild(p);
+
+                if(
+                    yr === year_to_date &&
+                    mon === month_to_date &&
+                    day === day_to_date
+                ){
+                    p.classList.add('today');
+                }
 
                 const eventList = document.createElement('ul');
                 eventList.id = "events-"+yr + "-" + (mon+1) + "-" + day;
@@ -87,7 +119,7 @@ function create_cal_body(){
 
                 const btn = document.createElement('button');
                 btn.classList.add("add-event-btn");
-                btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>';
+                btn.innerHTML = '<span class="plus">+</span>';
                 date_cell.appendChild(btn);
 
                 const currentDay = day;
@@ -108,6 +140,12 @@ function create_cal_body(){
     }
 }
 
+
+/**
+ * 
+ * @param {*} date 
+ * @returns string of the date formatted as "month day with suffix ex: January 1st, March 3rd, etc"
+ */
 function dateFormat(date){
     let format = '';
     const day = date.getDate()
@@ -131,6 +169,10 @@ function dateFormat(date){
 }
 
 //Show form
+/**
+ * Shows pop up form for adding events to a day
+ * @param {*} date 
+ */
 function showForm(date){
     selectedDate = date;
     document.getElementById('overlay').style.display = 'block';
@@ -139,6 +181,9 @@ function showForm(date){
     event_title.textContent = "Add Event for " + format;
 }
 //Close form
+/**
+ * Closes pop up form for adding events to day and resets all values to default
+ */
 function closeForm(){
     selectedDate = null;
     document.getElementById('overlay').style.display = 'none';
@@ -153,10 +198,10 @@ function closeForm(){
     document.getElementById('event-end').value = '';
 }
 
-cancel_btn.addEventListener('click', function(){
-    closeForm()
-});
+//button to close form
+cancel_btn.addEventListener('click', closeForm);
 
+//button to save event into database and display on calendar
 save_btn.addEventListener('click', async function(event){
     event.preventDefault();
 
@@ -172,7 +217,7 @@ save_btn.addEventListener('click', async function(event){
         return;
     }
     else{
-        const event = {
+        const data = {
             name : event_name,
             description : event_description,
             type : event_type,
@@ -191,21 +236,26 @@ save_btn.addEventListener('click', async function(event){
             planner[dateKey] = []; 
         }
 
-        planner[dateKey].push(event);
+        planner[dateKey].push(data);
 
         const eventList = document.getElementById("events-" + dateKey);
 
         const li = document.createElement('li');
         li.textContent = event_name;
+        li.classList.add('event-item');
+        li.dataset.eventData = JSON.stringify(data); // Store event data in a data attribute
         eventList.appendChild(li);
 
         
         //Save planner func
-        await savePlanner();
+        let result = await savePlanner();
+        if (!result){
+            console.log("Could not save event to database");
+            console.log("Event will be used for current session but not for future sessions");
+        }
         closeForm();      
     }
 });
-
 
 //Go back one month
 prev.addEventListener('click', function() {
@@ -215,7 +265,7 @@ prev.addEventListener('click', function() {
         mon = 11;
     }
     set_header();   
-    create_cal_body();
+    create_monthly_view_B();
     displayPlanner(planner); 
 
 });
@@ -228,11 +278,12 @@ next.addEventListener('click', function() {
         mon = 0;
     }
     set_header();   
-    create_cal_body(); 
+    create_monthly_view_B(); 
     displayPlanner(planner);
 
 });
 
+//Displays events on the calendar for the current month
 function displayPlanner(events){
 
     for(const key in events){
@@ -254,11 +305,17 @@ function displayPlanner(events){
             const li = document.createElement('li');
             li.textContent = event.name;
             li.classList.add('event-item');
+            li.dataset.eventData = JSON.stringify(event); // Store event data in a data attribute
             eventList.appendChild(li);
         });
     }
 }
 
+
+/**
+ * gets data from planner variable and sends it to the server to be stored in the database
+ * @returns true, false, or none
+ */
 async function savePlanner(){
     try{
         const response = await fetch('/api/save', {
@@ -291,12 +348,13 @@ async function savePlanner(){
     }
 }
 
+/**
+ * gets planner data from the server and stores it into the planner variable
+ * @returns planner data in a JSON type obj
+ */
 async function getPlanner(){
     try{
         const response = await fetch('/api/planner_data');
-        //const text = await response.text();
-
-        //console.log('RAW RESPONSE: ', text);
 
         if(response.ok){
             const data = await response.json();
@@ -317,8 +375,15 @@ async function getPlanner(){
 document.addEventListener('DOMContentLoaded', async function(){
 
     set_header();
-    create_cal_header();
-    create_cal_body();
+    create_monthly_view_H();
+    create_monthly_view_B();
     planner = await getPlanner();
     displayPlanner(planner);
+
+    //Event listener for each event item on the calendar
+    document.querySelectorAll('.event-item').forEach(item => {
+    item.addEventListener('click',function(){
+        console.log("Event button works");
+        });
+    });
 });
