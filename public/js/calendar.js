@@ -375,7 +375,8 @@ function displayPlanner(events){
         //Display name of each event
         events[key].forEach(event => {
             if(event.id === null){
-                event.id = count;
+                event["id"] = count;
+                console.log(event);
             }
 
             const li = document.createElement('li');
