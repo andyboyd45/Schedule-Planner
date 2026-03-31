@@ -371,15 +371,19 @@ function displayPlanner(events){
         }
 
         eventList.innerHTML = '';
-        count = 1;
+        count = 0;
         //Display name of each event
         events[key].forEach(event => {
+            if(event.id === null){
+                event.id = count;
+            }
 
             const li = document.createElement('li');
             li.textContent = event.name;
             li.classList.add('event-item');
             li.dataset.eventData = JSON.stringify(event); // Store event data in a data attribute
             eventList.appendChild(li);
+            count ++;
         });
     }
 }
