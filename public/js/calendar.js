@@ -283,6 +283,7 @@ async function edit_event(event, item){
     }
     
     await savePlanner();
+    document.getElementById(data.date + '-' + data.id).textContent = event_name;
     closeForm();
     
 }
@@ -333,6 +334,7 @@ async function save_event(event){
         const eventList = document.getElementById("events-" + dateKey);
 
         const li = document.createElement('li');
+        li.id = dateKey + '-' + id;
         li.textContent = event_name;
         li.classList.add('event-item');
         li.dataset.eventData = JSON.stringify(data); // Store event data in a data attribute
