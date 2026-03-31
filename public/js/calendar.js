@@ -36,6 +36,8 @@ let prev = document.getElementById('prev');
 let next = document.getElementById('next');
 let cancel_btn = document.getElementById('cancel-btn');
 let save_btn = document.getElementById('save-btn');
+let delete_btn = null;
+let edit_btn = null;
 
 //Constants
 const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -190,9 +192,10 @@ function showForm(date = null, mode = "add", item=null){
         let format = dateFormat(selectedDate);
         event_title.textContent = "Add Event for " + format;     
         
-        save_btn = replaceButton(save_btn);
-        cancel_btn = replaceButton(cancel_btn);
-
+        if(edit_btn && delete_btn){
+        save_btn = replaceButton(edit_btn);
+        cancel_btn = replaceButton(delete_btn);
+        }
         save_btn.textContent = "Save Event";
         cancel_btn.textContent = "Cancel";
 
@@ -219,8 +222,8 @@ function showForm(date = null, mode = "add", item=null){
         document.getElementById('event-end').value = eventData.end;
 
         //Swap cancel and save button for save edit and delete buttons
-        let edit_btn = replaceButton(save_btn);
-        let delete_btn = replaceButton(cancel_btn);
+        edit_btn = replaceButton(save_btn);
+        delete_btn = replaceButton(cancel_btn);
 
         edit_btn.textContent = "Save Edit";
         delete_btn.textContent = "Delete Event";
@@ -238,7 +241,6 @@ function showForm(date = null, mode = "add", item=null){
         console.error("Invalid mode, date, or item");
     }
 }
-//Close form
 /**
  * Closes pop up form for adding events to day and resets all values to default
  */
