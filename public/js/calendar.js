@@ -282,8 +282,10 @@ async function edit_event(event, item){
             date : data.date        
     }
     
+    const li = document.getElementById(data.date + '-' + data.id);
+    li.textContent = event_name;
+    li.dataset.eventData = JSON.stringify(planner[data.date][data.id]);
     await savePlanner();
-    displayPlanner(planner);
     closeForm();
     
 }
