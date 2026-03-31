@@ -172,13 +172,50 @@ function dateFormat(date){
 /**
  * Shows pop up form for adding events to a day
  * @param {*} date 
+ * @param {*} mode 
+ * @param {*} item 
+
  */
-function showForm(date){
-    selectedDate = date;
-    document.getElementById('overlay').style.display = 'block';
-    document.getElementById('event-form').style.display = 'block';
-    let format = dateFormat(selectedDate);
-    event_title.textContent = "Add Event for " + format;
+function showForm(date = null, mode = "add", item=null){
+    if (mode === "add" && date){
+        selectedDate = date;
+        document.getElementById('overlay').style.display = 'block';
+        document.getElementById('event-form').style.display = 'block';
+        let format = dateFormat(selectedDate);
+        event_title.textContent = "Add Event for " + format;        
+    }
+    else if(mode === "edit" && item){
+        document.getElementById('overlay').style.display = 'block';
+        document.getElementById('event-form').style.display = 'block';
+        event_title.textContent = "Edit/Delete Event";
+        
+        const eventData = JSON.parse(item.dataset.eventData);
+
+        document.getElementById('event-name').value = eventData.name;
+        document.getElementById('event-description').value = eventData.description;
+        document.getElementById('event-type').value = eventData.type;
+        document.getElementById('event-start').value = eventData.start;
+        document.getElementById('event-end').value = eventData.end;
+
+        //Swap cancel and save button for save edit and delete buttons
+        let edit_btn = replaceButton(save_btn);
+        let delete_btn = replaceButton(cancel_btn);
+
+        edit_btn.textContent = "Save Edit";
+        delete_btn.textContent = "Delete Event";
+
+        edit_btn.addEventListener('click', function(){
+            console.log("Save edit works");
+            closeForm();
+        });
+        delete_btn.addEventListener('click', function(){
+            console.log("Delete event works");
+        });
+
+    }
+    else{
+        console.error("Invalid mode, date, or item");
+    }
 }
 //Close form
 /**
