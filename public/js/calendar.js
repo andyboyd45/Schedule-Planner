@@ -36,8 +36,8 @@ let prev = document.getElementById('prev');
 let next = document.getElementById('next');
 let cancel_btn = document.getElementById('cancel-btn');
 let save_btn = document.getElementById('save-btn');
-let delete_btn = null;
-let edit_btn = null;
+let delete_btn = replaceButton(cancel_btn);
+let edit_btn = replaceButton(save_btn);
 
 //Constants
 const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
