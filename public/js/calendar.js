@@ -47,13 +47,10 @@ const format_nd = [2, 22];
 const format_rd = [3, 23];
 
 function replaceButton(btn){
-    try{
     const newBtn = btn.cloneNode(true);
     btn.parentNode.replaceChild(newBtn, btn);
     return newBtn;
-    }catch(error){
-        return null;
-    }
+
 }
 
 /**Set Month and year at the top of the planner */
@@ -186,7 +183,6 @@ function dateFormat(date){
  * @param {*} date 
  * @param {*} mode 
  * @param {*} item 
-
  */
 function showForm(date = null, mode = "add", item=null){
     if (mode === "add" && date){
