@@ -239,8 +239,8 @@ function showForm(date = null, mode = "add", item=null){
         save_btn.addEventListener('click', function(event){
             edit_event(event, item=item);
         });
-        cancel_btn.addEventListener('click', function(){
-            console.log("Delete event works");
+        cancel_btn.addEventListener('click', function(event){
+            delete_event(event, item=item);
         });
 
     }
@@ -263,6 +263,26 @@ function closeForm(){
     document.getElementById('event-description').value = '';
     document.getElementById('event-start').value = '';
     document.getElementById('event-end').value = '';
+}
+
+async function delete_event(event, item){
+    event.preventDefault();
+    const data = JSON.parse(item.dataset.eventData);
+
+    if(!planner[data.date][data.id]){return;}
+
+    planner[data.date] = planner[data.date].filter(event => event.id !== data.id);
+
+    if(planner[data.date].length === 0){
+        delete planner[data.date];
+    }
+
+    const li = document.getElementById(data.date + '-' + data.id);
+    if(li){
+        li.remove();
+    }
+    await savePlanner();
+    closeForm();
 }
 
 async function edit_event(event, item){
