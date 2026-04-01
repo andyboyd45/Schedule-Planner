@@ -192,8 +192,10 @@ function showForm(date = null, mode = "add", item=null){
         let format = dateFormat(selectedDate);
         event_title.textContent = "Add Event for " + format;     
         
-        save_btn = replaceButton(edit_btn);
-        cancel_btn = replaceButton(delete_btn);
+        if(save_btn === edit_btn || cancel_btn === delete_btn){
+            save_btn = replaceButton(edit_btn);
+            cancel_btn = replaceButton(delete_btn);    
+        }
 
         save_btn.textContent = "Save Event";
         cancel_btn.textContent = "Cancel";
