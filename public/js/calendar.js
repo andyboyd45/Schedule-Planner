@@ -36,8 +36,6 @@ let prev = document.getElementById('prev');
 let next = document.getElementById('next');
 let cancel_btn = document.getElementById('cancel-btn');
 let save_btn = document.getElementById('save-btn');
-let delete_btn = replaceButton(cancel_btn);
-let edit_btn = replaceButton(save_btn);
 
 //Constants
 const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -46,11 +44,20 @@ const format_st = [1,21,31];
 const format_nd = [2, 22];
 const format_rd = [3, 23];
 
-function replaceButton(btn){
+function replaceButton(btn) {
+    if (!btn) {
+        console.error("replaceButton got an invalid button:", btn);
+        return null;
+    }
+
+    if (!btn.parentNode) {
+        console.error("Button has no parentNode:", btn);
+        return null;
+    }
+
     const newBtn = btn.cloneNode(true);
     btn.parentNode.replaceChild(newBtn, btn);
     return newBtn;
-
 }
 
 /**Set Month and year at the top of the planner */
@@ -192,10 +199,9 @@ function showForm(date = null, mode = "add", item=null){
         let format = dateFormat(selectedDate);
         event_title.textContent = "Add Event for " + format;     
         
-        if(save_btn === edit_btn || cancel_btn === delete_btn){
-            save_btn = replaceButton(edit_btn);
-            cancel_btn = replaceButton(delete_btn);    
-        }
+        save_btn = replaceButton(save_btn);
+        cancel_btn = replaceButton(cancel_btn); 
+
 
         save_btn.textContent = "Save Event";
         cancel_btn.textContent = "Cancel";
@@ -223,17 +229,17 @@ function showForm(date = null, mode = "add", item=null){
         document.getElementById('event-end').value = eventData.end;
 
         //Swap cancel and save button for save edit and delete buttons
-        edit_btn = replaceButton(save_btn);
-        delete_btn = replaceButton(cancel_btn);
+        save_btn = replaceButton(save_btn);
+        cancel_btn = replaceButton(cancel_btn);
 
 
-        edit_btn.textContent = "Save Edit";
-        delete_btn.textContent = "Delete Event";
+        save_btn.textContent = "Save Edit";
+        cancel_btn.textContent = "Delete Event";
 
-        edit_btn.addEventListener('click', function(event){
+        save_btn.addEventListener('click', function(event){
             edit_event(event, item=item);
         });
-        delete_btn.addEventListener('click', function(){
+        cancel_btn.addEventListener('click', function(){
             console.log("Delete event works");
         });
 
