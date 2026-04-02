@@ -531,7 +531,7 @@ async function getData(){
             document.getElementById('welcome-message').textContent = "Welcome, " + data.username + "!";
             event_types = data.event_types;
             console.log("data loaded successfully");
-            console.log(planner);
+            console.log(event_types);
             return planner;
         }
 
@@ -562,4 +562,5 @@ document.addEventListener('DOMContentLoaded', async function(){
     planner = await getData();
     displayPlanner(planner);
     reloadEventItems();
+    createEventTypeList();
 });
