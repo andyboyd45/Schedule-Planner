@@ -1,6 +1,5 @@
 /**
  * TODO:
- * edit/delete events
  * Event categories with colors
  * Responsive mobile layout
  * Add weekly calendar view
@@ -269,7 +268,7 @@ async function delete_event(event, item){
     event.preventDefault();
     const data = JSON.parse(item.dataset.eventData);
 
-    if(!planner[data.date][data.id]){return;}
+    if(!planner[data.date]){return;}
 
     planner[data.date] = planner[data.date].filter(event => event.id !== data.id);
 
@@ -277,10 +276,20 @@ async function delete_event(event, item){
         delete planner[data.date];
     }
 
+    //Update id of events after the deleted event to prevent id confusion/errors
+    for(let i = 0; i < planner[data.date].length; i++){
+        if(i > data.id){
+            planner[data.date][i].id--;
+        }
+    }
+
     const li = document.getElementById(data.date + '-' + data.id);
     if(li){
         li.remove();
     }
+
+
+
     await savePlanner();
     closeForm();
 }
