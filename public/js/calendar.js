@@ -98,7 +98,6 @@ function createEventTypeList(){
         colorBox.style.backgroundColor = event_type.color;
 
         li.appendChild(colorBox);
-        li.appendChild(text);
         event_type_list.appendChild(li);
     });
 }
