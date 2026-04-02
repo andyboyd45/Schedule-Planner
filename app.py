@@ -163,7 +163,7 @@ def planner_data():
         return jsonify({
             'planner_data' : json.loads(user['planner_data']),
             'username': username,
-            'event_types': user['event_types']
+            'event_types': json.loads(user['event_types'])
         }), 200
         
         
