@@ -167,8 +167,7 @@ def planner_data():
             db.close()
 
 #Get user's new planner data
-#TODO: Change to PUT method
-@app.route('/api/save', methods=['POST'])
+@app.route('/api/save', methods=['PUT'])
 def save_planner_data():
     data = request.get_json()
     planner = json.dumps(data.get('planner_data'))

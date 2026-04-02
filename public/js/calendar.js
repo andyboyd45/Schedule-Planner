@@ -277,11 +277,17 @@ async function delete_event(event, item){
     }
     else{
         //Update id of events after the deleted event to prevent id confusion/errors
-        for(let i = 0; i < planner[data.date].length; i++){
-            if(i > data.id){
-                planner[data.date][i].id--;
+        planner[data.date].forEach(event => {
+            const old_id = event.id;
+            const id = planner[data.date].indexOf(event);
+            event.id = id;
+
+            const li = document.getElementById(data.date + '-' + old_id);
+            if(li){
+                li.id = data.date + '-' + id;
+                li.dataset.eventData = JSON.stringify(event);
             }
-        }        
+        });       
     }
 
     const li = document.getElementById(data.date + '-' + data.id);
@@ -460,7 +466,7 @@ function displayPlanner(events){
 async function savePlanner(){
     try{
         const response = await fetch('/api/save', {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
