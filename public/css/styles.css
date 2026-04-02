@@ -344,6 +344,31 @@ body{
     letter-spacing: 0.5px;    
 }
 
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.event-list .event-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #e0e0e0;
+  background-color: #ffffff;
+  color: #333333;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
 .date_cell{
     display: flex;
     justify-content: space-between; 
@@ -368,6 +393,7 @@ body{
 .calendar td.empty{
     border: none;
 }
+
 .add-event-btn{
     background-color: #2f2f2f;
     color: white;
@@ -382,6 +408,7 @@ body{
     cursor: pointer;
     transition: all 0.2s ease;     
 }
+
 .add-event-btn .plus {
     font-weight: bold;
     font-size: 14px;
