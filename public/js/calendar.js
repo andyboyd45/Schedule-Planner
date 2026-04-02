@@ -18,26 +18,7 @@ let yr = year_to_date;
 let mon = month_to_date;
 let selectedDate = null;
 let planner = {};
-let calendar_event_types = [  {
-    "name": "work",
-    "color": "#1a73e8",
-    "default": true
-  },
-  {
-    "name": "health",
-    "color": "#34a853",
-    "default": true
-  },
-  {
-    "name": "fitness",
-    "color": "#e8710a",
-    "default": true
-  },
-  {
-    "name": "personal",
-    "color": "#9c27b0",
-    "default": true
-  }];
+let calendar_event_types = {};
 
 //Select
 let event_type_select = document.getElementById('event-type');
@@ -99,6 +80,11 @@ function createEventTypeList(){
 
         li.appendChild(colorBox);
         event_type_list.appendChild(li);
+
+        const option = document.createElement('option');
+        option.value = event_type.name;
+        option.textContent = event_type.name;
+        event_type_select.appendChild(option);
     });
 }
 
@@ -582,7 +568,7 @@ document.addEventListener('DOMContentLoaded', async function(){
     create_monthly_view_H();
     create_monthly_view_B();
     planner = await getData();
+    createEventTypeList();
     displayPlanner(planner);
     reloadEventItems();
-    createEventTypeList();
 });
