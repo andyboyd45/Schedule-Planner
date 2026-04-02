@@ -47,6 +47,15 @@ def create_hashed_password(password):
 def verify_password(password, hashed):
     return bcrypt.checkpw(password.encode('utf-8'), hashed.encode('utf-8'))
 
+#Default event types for each user
+def event_types():
+    return [
+        {"name": "work", "color": "#1a73e8", "default": True},
+        {"name": "health", "color": "#34a853", "default": True},
+        {"name": "fitness", "color": "#e8710a", "default": True},
+        {"name": "personal", "color": "#9c27b0", "default": True}
+    ]
+
 #Sign up data sent to database
 @app.route('/api/signup', methods=['POST'])
 def signup():
@@ -80,7 +89,7 @@ def signup():
         
         #Insert new user into planner database with default values
         ID_planner = generate_serial_id()
-        cursor.execute("INSERT INTO planner (ID, user_ID, planner_data) VALUES (%s, %s, %s)", (ID_planner, ID_user, '{}'))
+        cursor.execute("INSERT INTO planner (ID, user_ID, planner_data, event_types) VALUES (%s, %s, %s, %s)", (ID_planner, ID_user, '{}', json.dumps(event_types())))
         db.commit()
 
         return jsonify({'message': 'User created successfully'}), 201
@@ -135,7 +144,7 @@ def login():
             db.close()
 
 #Send user's planner data to page
-@app.route('/api/planner_data', methods=['GET'])
+@app.route('/api/get_data', methods=['GET'])
 def planner_data():
     if 'user_id' not in session:
         return jsonify({'error': 'User Not logged in'}), 401
@@ -153,7 +162,8 @@ def planner_data():
         user = cursor.fetchone()
         return jsonify({
             'planner_data' : json.loads(user['planner_data']),
-            'username': username
+            'username': username,
+            'event_types': user['event_types']
         }), 200
         
         

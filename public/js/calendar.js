@@ -7,7 +7,7 @@
  * Drag and drop events(Complex and can be done last)
  */
 
-//Tody's date info used as a default when the calendar is loaded up
+//Today's date info used as a default when the calendar is loaded up
 const today = new Date();
 const year_to_date = today.getFullYear();
 const month_to_date = today.getMonth();
@@ -18,6 +18,13 @@ let yr = year_to_date;
 let mon = month_to_date;
 let selectedDate = null;
 let planner = {};
+let event_types = {};
+
+//Select
+let event_type_select = document.getElementById('event-type');
+
+//div
+let event_type_list = document.getElementById('event-type-list');
 
 //Table
 let table = document.getElementById('calendar_id');
@@ -57,6 +64,21 @@ function replaceButton(btn) {
     const newBtn = btn.cloneNode(true);
     btn.parentNode.replaceChild(newBtn, btn);
     return newBtn;
+}
+
+function createEventTypeList(){
+    event_types.forEach(event_type => {
+        const li = document.createElement('li');
+        li.id = "event-type-" + event_type.name;
+        li.dataset.eventTypeData = JSON.stringify(event_type);
+        const colorBox = document.createElement('span');
+        colorBox.classList.add('color-box');
+        colorBox.style.backgroundColor = event_type.color;
+        const text = document.createTextNode(event_type.name);
+        li.appendChild(colorBox);
+        li.appendChild(text);
+        event_type_list.appendChild(li);
+    });
 }
 
 /**Set Month and year at the top of the planner */
@@ -141,7 +163,7 @@ function create_monthly_view_B(){
                 btn.addEventListener('click', () => {
                     const getDate = new Date(yr, mon, currentDay);
                     console.log(getDate);
-                    showForm(getDate);
+                    showEventForm(getDate);
                 });
 
                 day++;
@@ -183,14 +205,13 @@ function dateFormat(date){
     return format;
 }
 
-//Show form
 /**
  * Shows pop up form for adding events to a day
  * @param {*} date 
  * @param {*} mode 
  * @param {*} item 
  */
-function showForm(date = null, mode = "add", item=null){
+function showEventForm(date = null, mode = "add", item=null){
     if (mode === "add" && date){
         selectedDate = date;
         document.getElementById('overlay').style.display = 'block';
@@ -206,7 +227,7 @@ function showForm(date = null, mode = "add", item=null){
         cancel_btn.textContent = "Cancel";
 
         //button to close form
-        cancel_btn.addEventListener('click', closeForm);
+        cancel_btn.addEventListener('click', closeEventForm);
 
         //button to save event into database and display on calendar
         save_btn.addEventListener('click', save_event);
@@ -250,7 +271,7 @@ function showForm(date = null, mode = "add", item=null){
 /**
  * Closes pop up form for adding events to day and resets all values to default
  */
-function closeForm(){
+function closeEventForm(){
     selectedDate = null;
     document.getElementById('overlay').style.display = 'none';
     document.getElementById('event-form').style.display = 'none';
@@ -298,7 +319,7 @@ async function delete_event(event, item){
 
 
     await savePlanner();
-    closeForm();
+    closeEventForm();
 }
 
 async function edit_event(event, item){
@@ -326,7 +347,7 @@ async function edit_event(event, item){
     li.textContent = event_name;
     li.dataset.eventData = JSON.stringify(planner[data.date][data.id]);
     await savePlanner();
-    closeForm();
+    closeEventForm();
     
 }
 
@@ -390,7 +411,7 @@ async function save_event(event){
             console.log("Could not save event to database");
             console.log("Event will be used for current session but not for future sessions");
         }
-        closeForm();      
+        closeEventForm();      
     }    
 }
 
@@ -497,17 +518,18 @@ async function savePlanner(){
 
 /**
  * gets planner data from the server and stores it into the planner variable
- * @returns planner data in a JSON type obj
+ * @returns username, planner data, and event types
  */
-async function getPlanner(){
+async function getData(){
     try{
-        const response = await fetch('/api/planner_data');
+        const response = await fetch('/api/get_data');
 
         if(response.ok){
             const data = await response.json();
 
             const planner = data.planner_data;
             document.getElementById('welcome-message').textContent = "Welcome, " + data.username + "!";
+            event_types = data.event_types;
             console.log("data loaded successfully");
             console.log(planner);
             return planner;
@@ -529,7 +551,7 @@ function reloadEventItems(){
 
 function addEventButton(item){
     item.addEventListener('click',function(){
-        showForm(null, "edit", item);
+        showEventForm(null, "edit", item);
         });
 }
 
@@ -537,7 +559,7 @@ document.addEventListener('DOMContentLoaded', async function(){
     set_header();
     create_monthly_view_H();
     create_monthly_view_B();
-    planner = await getPlanner();
+    planner = await getData();
     displayPlanner(planner);
     reloadEventItems();
 });

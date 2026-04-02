@@ -15,17 +15,16 @@
             <nav class = "top-links">
                 <a href="#" name = "account">ACCOUNT</a>
                 <a href="#" name = "settings">SETTINGS</a>
-
             </nav>
             <nav class="nav-links">
                 <a href="/public/index.html" class="home-button" name="home">HOME</a>
             </nav>
         </header>
-        <div class = "calendar-header">
+
+        <div class="calendar-header">
             <div class = "date">
                 <p id = "month" class = 'm'>Month-placeholder</p>
                 <p id = "year" class = 'y'>Year-placeholder</p>
-
                 <button id="prev" class = "pr"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg></button>
                 <button id="next" class = "nxt"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg></button>
             </div>
@@ -33,29 +32,42 @@
                 <div class = 'view-type'>   
                     <label>Calendar View Type(Coming Soon)</label>
                     <select class = 'view-select'>
-                        <option value="work">Monthly</option>
-                        <option value="work">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="weekly">Weekly</option>
                     </select>                    
                 </div>
                 <div class = 'view-message'>
                     <p class = 'Message' id = 'welcome-message'> Welcome back User </p>
                 </div>
             </div>
-            
         </div>
 
-        <table class = "calendar" id = 'calendar_id'>
-            <thead id = "cal_header"></thead>
-            <tbody id = "cal_body"></tbody>
-        </table>
+        <!-- Main layout: sidebar + calendar -->
+        <div class="main-layout">
 
+            <!-- Left Sidebar -->
+            <div class="sidebar">
+                <button class="add-type-btn" id="add-type-btn">+ Add Event Type</button>
+
+                <div class="event-types-list" id="event-types-list">
+                    <!-- Event type buttons injected here by JS -->
+                </div>
+            </div>
+
+            <!-- Calendar -->
+            <table class="calendar" id="calendar_id">
+                <thead id="cal_header"></thead>
+                <tbody id="cal_body"></tbody>
+            </table>
+
+        </div>
 
         <!-- Overlay -->
         <div id="overlay" class="overlay"></div>
 
-        <!-- Popup form -->
+        <!-- Add/Edit Event Popup -->
         <div id="event-form" class="event-form">
-            <h3 id = "event-title">Add Event</h3>
+            <h3 id="event-title">Add Event</h3>
 
             <label>Name</label>
             <input type="text" id="event-name" placeholder="Event name">
@@ -65,10 +77,7 @@
 
             <label>Type</label>
             <select id="event-type">
-                <option value="work">Work</option>
-                <option value="health">Health</option>
-                <option value="fitness">Fitness</option>
-                <option value="personal">Personal</option>
+                <!-- Populated dynamically by JS -->
             </select>
 
             <label>Start Time</label>
@@ -77,11 +86,47 @@
             <label>End Time</label>
             <input type="time" id="event-end">
 
-            <p id = "error-message" class = "error-message"></p>
+            <p id="error-message" class="error-message"></p>
 
             <div class="form-buttons">
                 <button id="cancel-btn">Cancel</button>
                 <button id="save-btn">Save</button>
+            </div>
+        </div>
+
+        <!-- Add/Edit Event Type Popup -->
+        <div id="event-type-form" class="event-form">
+            <h3 id="event-type-title">Add Event Type</h3>
+
+            <label>Name</label>
+            <input type="text" id="event-type-name" placeholder="Event type name">
+
+            <label>Color</label>
+            <input type="color" id="event-type-color" value="#1a73e8">
+
+            <p id="event-type-error" class="error-message"></p>
+
+            <div class="form-buttons">
+                <button id="event-type-cancel-btn">Cancel</button>
+                <button id="event-type-save-btn">Save</button>
+            </div>
+        </div>
+
+        <!-- Edit/Delete Event Type Popup -->
+        <div id="event-type-edit-form" class="event-form">
+            <h3>Edit Event Type</h3>
+
+            <label>Name</label>
+            <input type="text" id="edit-type-name" placeholder="Event type name">
+
+            <label>Color</label>
+            <input type="color" id="edit-type-color">
+
+            <p id="edit-type-error" class="error-message"></p>
+
+            <div class="form-buttons">
+                <button id="edit-type-delete-btn">Delete</button>
+                <button id="edit-type-save-btn">Save</button>
             </div>
         </div>
 
