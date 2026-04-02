@@ -85,8 +85,8 @@ function replaceButton(btn) {
     return newBtn;
 }
 
-function createEventTypeList(){
-    calendar_event_types.forEach(event_type => {
+function createEventTypeList(event_types){
+    event_types.forEach(event_type => {
         const li = document.createElement('li');
         li.id = "event-type-" + event_type.name;
         li.dataset.eventTypeData = JSON.stringify(event_type);
@@ -581,5 +581,6 @@ document.addEventListener('DOMContentLoaded', async function(){
     planner = await getData();
     displayPlanner(planner);
     reloadEventItems();
-    createEventTypeList();
+    console.log("event_types before call:", calendar_event_types, Array.isArray(calendar_event_types));
+    createEventTypeList(calendar_event_types);
 });
