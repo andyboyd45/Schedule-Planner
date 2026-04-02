@@ -384,14 +384,280 @@ body{
     background: #1558b0;
 }
 
-/* Responsive Design --- Need to change and clean up */
-@media (max-width: 768px) {
-    header{
-        flex-direction: column;
-        gap: 10px;
+/* =============================================
+   RESPONSIVE MOBILE LAYOUT — Schedule Planner
+   Add this to the bottom of your styles.css
+   ============================================= */
+
+/* ── Tablet (max 900px) ── */
+@media (max-width: 900px) {
+
+    .page-header {
+        padding: 10px 16px;
     }
-    .base{
+
+    .logo-icon {
+        width: 55px;
+        height: 55px;
+    }
+
+    .logo-text {
+        font-size: 17px;
+    }
+
+    .calendar-header {
         flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 16px;
+    }
+
+    .view {
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .view-type {
+        margin-right: 0;
+    }
+
+    .calendar {
+        height: auto;
+    }
+
+    .calendar td {
+        height: 80px;
+        padding: 4px 6px;
+        font-size: 12px;
+    }
+}
+
+/* ── Mobile (max 600px) ── */
+@media (max-width: 600px) {
+
+    body {
+        padding: 4px;
+    }
+
+    /* ── Header ── */
+    .page-header {
+        border-radius: 12px;
+        padding: 10px 14px;
+        margin: 6px auto;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .logo-icon {
+        width: 44px;
+        height: 44px;
+        margin-right: 8px;
+        margin-left: -8px;
+    }
+
+    .logo-text {
+        font-size: 15px;
+    }
+
+    .top-links a {
+        font-size: 10px;
+    }
+
+    /* ── Landing page ── */
+    .Main {
+        height: 500px;
+        border-radius: 12px;
+        margin: 6px auto;
+        width: 100%;
+    }
+
+    .Text {
+        width: 85%;
+        margin-top: 30%;
+    }
+
+    .title {
+        font-size: 16px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        margin-top: 12px;
+    }
+
+    .nav-links a {
+        width: 160px;
+        text-align: center;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-size: 10px;
+    }
+
+    /* ── Forms (login / signup) ── */
+    .form-container {
+        border-radius: 12px;
+        height: auto;
+        padding: 32px 20px;
+        margin: 6px auto;
+        width: 100%;
+    }
+
+    .form-input {
+        width: 240px;
+    }
+
+    .signup-button {
+        width: 240px;
+    }
+
+    /* ── Calendar header ── */
+    .calendar-header {
+        border-radius: 12px;
+        margin: 6px auto;
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px 14px;
+    }
+
+    .date {
+        align-items: center;
+    }
+
+    .m, .y {
+        font-size: 14px;
+        padding-top: 0;
+    }
+
+    .view {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        width: 100%;
+    }
+
+    .view-type {
+        margin-right: 0;
+    }
+
+    .view-type label {
+        font-size: 11px;
+    }
+
+    .view-type select {
+        font-size: 12px;
+    }
+
+    .view-message .Message {
+        font-size: 12px;
+    }
+
+    /* ── Calendar grid ── */
+    .calendar {
+        border-radius: 12px;
+        margin: 6px auto;
+        width: 100%;
+        height: auto;
+        padding: 0;
+    }
+
+    .calendar th {
+        font-size: 10px;
+        padding: 6px 0;
+        /* Abbreviate to 1 letter on very small screens */
+    }
+
+    .calendar td {
+        height: 60px;
+        padding: 3px 4px;
+        font-size: 10px;
+    }
+
+    .day {
+        font-size: 10px;
+        width: 22px;
+        height: 22px;
+    }
+
+    .add-event-btn {
+        width: 20px;
+        height: 20px;
+        padding-left: 6px;
+    }
+
+    .add-event-btn .plus {
+        font-size: 12px;
+    }
+
+    .event-item {
+        font-size: 9px;
+        padding: 3px 5px;
+        border-radius: 4px;
+    }
+
+    /* ── Event popup form ── */
+    .event-form {
+        width: 90vw;
+        max-width: 340px;
+        padding: 18px 16px;
+        border-radius: 12px;
+    }
+
+    .event-form h3 {
+        font-size: 14px;
+    }
+
+    .event-form label {
+        font-size: 12px;
+    }
+
+    .event-form input,
+    .event-form select {
+        font-size: 13px;
+        padding: 7px;
+    }
+
+    .form-buttons button {
+        font-size: 13px;
+        padding: 9px;
+    }
+}
+
+/* ── Very small screens (max 380px) ── */
+@media (max-width: 380px) {
+
+    .calendar th {
+        font-size: 9px;
+        letter-spacing: 0;
+    }
+
+    .calendar td {
+        height: 50px;
+        padding: 2px 3px;
+    }
+
+    .day {
+        font-size: 9px;
+        width: 18px;
+        height: 18px;
+    }
+
+    .add-event-btn {
+        width: 18px;
+        height: 18px;
+        padding-left: 5px;
+    }
+
+    .event-item {
+        font-size: 8px;
+        padding: 2px 4px;
+    }
+
+    .logo-text {
+        font-size: 13px;
     }
 }
 
