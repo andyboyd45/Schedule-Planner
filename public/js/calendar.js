@@ -43,7 +43,7 @@ let calendar_event_types = [  {
 let event_type_select = document.getElementById('event-type');
 
 //div
-let event_type_list = document.getElementById('event-type-list');
+let event_type_list = document.getElementById('event-types-list');
 
 //Table
 let table = document.getElementById('calendar_id');
