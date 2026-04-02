@@ -1,7 +1,7 @@
 /**
  * TODO:
  * Event categories with colors
- * Responsive mobile layout
+ * Responsive mobile layout (Implemented but will need improvemnts)
  * Add weekly calendar view
  * allow users to add event types
  * Drag and drop events(Complex and can be done last)

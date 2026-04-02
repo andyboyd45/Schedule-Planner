@@ -384,10 +384,6 @@ body{
     background: #1558b0;
 }
 
-/* =============================================
-   RESPONSIVE MOBILE LAYOUT — Schedule Planner
-   Add this to the bottom of your styles.css
-   ============================================= */
 
 /* ── Tablet (max 900px) ── */
 @media (max-width: 900px) {
