@@ -18,7 +18,26 @@ let yr = year_to_date;
 let mon = month_to_date;
 let selectedDate = null;
 let planner = {};
-let event_types = {};
+let calendar_event_types = [  {
+    "name": "work",
+    "color": "#1a73e8",
+    "default": true
+  },
+  {
+    "name": "health",
+    "color": "#34a853",
+    "default": true
+  },
+  {
+    "name": "fitness",
+    "color": "#e8710a",
+    "default": true
+  },
+  {
+    "name": "personal",
+    "color": "#9c27b0",
+    "default": true
+  }];
 
 //Select
 let event_type_select = document.getElementById('event-type');
@@ -67,7 +86,7 @@ function replaceButton(btn) {
 }
 
 function createEventTypeList(){
-    event_types.forEach(event_type => {
+    calendar_event_types.forEach(event_type => {
         const li = document.createElement('li');
         li.id = "event-type-" + event_type.name;
         li.dataset.eventTypeData = JSON.stringify(event_type);
@@ -529,9 +548,9 @@ async function getData(){
 
             const planner = data.planner_data;
             document.getElementById('welcome-message').textContent = "Welcome, " + data.username + "!";
-            event_types = data.event_types;
+            calendar_event_types = data.event_types;
             console.log("data loaded successfully");
-            console.log(event_types);
+            console.log(calendar_event_types);
             return planner;
         }
 
