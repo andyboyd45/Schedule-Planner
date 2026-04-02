@@ -275,12 +275,13 @@ async function delete_event(event, item){
     if(planner[data.date].length === 0){
         delete planner[data.date];
     }
-
-    //Update id of events after the deleted event to prevent id confusion/errors
-    for(let i = 0; i < planner[data.date].length; i++){
-        if(i > data.id){
-            planner[data.date][i].id--;
-        }
+    else{
+        //Update id of events after the deleted event to prevent id confusion/errors
+        for(let i = 0; i < planner[data.date].length; i++){
+            if(i > data.id){
+                planner[data.date][i].id--;
+            }
+        }        
     }
 
     const li = document.getElementById(data.date + '-' + data.id);
@@ -373,7 +374,7 @@ async function save_event(event){
         li.textContent = event_name;
         li.classList.add('event-item');
         li.dataset.eventData = JSON.stringify(data); // Store event data in a data attribute
-        addEventListener(li);
+        addEventButton(li);
         eventList.appendChild(li);
 
         
@@ -516,11 +517,11 @@ async function getPlanner(){
 function reloadEventItems(){
     //Event listener for each event item on the calendar
     document.querySelectorAll('.event-item').forEach(item => {
-        addEventListener(item);
+        addEventButton(item);
     });    
 }
 
-function addEventListener(item){
+function addEventButton(item){
     item.addEventListener('click',function(){
         showForm(null, "edit", item);
         });

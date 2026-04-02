@@ -57,6 +57,9 @@ def signup():
     
     ID_user = generate_serial_id()
     hash_password = create_hashed_password(password)
+
+    db = None
+    cursor = None 
     try:
         
         db = get_db()
@@ -85,8 +88,10 @@ def signup():
         print(e)
         return jsonify({'error': 'PYTHON ERROR: An error occurred while creating the user'}), 500
     finally:
-        cursor.close()
-        db.close()
+        if cursor:
+            cursor.close()
+        if db:
+            db.close()
 
 #Login data verified with data and send user schedule data to frontend
 @app.route('/api/login', methods=['POST'])
@@ -94,7 +99,9 @@ def login():
     data = request.get_json()
     username = data.get('username')
     password = data.get('password')
-    
+
+    db = None
+    cursor = None    
     try:
         db = get_db()
         cursor = db.cursor(dictionary=True, buffered=True)
@@ -122,8 +129,10 @@ def login():
         return jsonify({'error': 'PYTHON ERROR: An error occurred while logging in'}), 500
     
     finally:
-        cursor.close()
-        db.close()
+        if cursor:
+            cursor.close()
+        if db:
+            db.close()
 
 #Send user's planner data to page
 @app.route('/api/planner_data', methods=['GET'])
@@ -134,6 +143,8 @@ def planner_data():
     user_id = session['user_id']
     username = session['username']
     
+    db = None
+    cursor = None
     try:
         db = get_db()
         cursor = db.cursor(dictionary=True)
@@ -150,8 +161,10 @@ def planner_data():
         print(e)
         return jsonify({'error': 'Server side error'}), 500
     finally:
-        cursor.close()
-        db.close
+        if cursor:
+            cursor.close()
+        if db:
+            db.close()
 
 #Get user's new planner data
 #TODO: Change to PUT method
@@ -162,6 +175,11 @@ def save_planner_data():
     
     user_id = session['user_id']
     
+    if 'user_id' not in session:
+        return jsonify({'error': 'User Not logged in'}), 401
+    
+    db = None
+    cursor = None
     try:
         db = get_db()
         cursor = db.cursor()
@@ -174,8 +192,11 @@ def save_planner_data():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     finally:
-        cursor.close()
-        db.close()
+        if cursor:
+            cursor.close()
+        if db:
+            db.close()
+
         
         
            
