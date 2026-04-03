@@ -299,6 +299,7 @@ body{
     height: 12px;
     border-radius: 50%;
     flex-shrink: 0;
+    display: inline-block;
 }
 
 .event-type-label {
@@ -494,11 +495,6 @@ body{
     cursor: pointer;
     opacity: 0.85;
 }
-
-.event-item.work     { background-color: #1a73e8; }
-.event-item.health   { background-color: #34a853; }
-.event-item.fitness  { background-color: #e8710a; }
-.event-item.personal { background-color: #9c27b0; }
 
 #save-btn {
     background: #1a73e8;
@@ -759,7 +755,8 @@ input[type="color"] {
     }
 
     .event-types-list {
-        flex-direction: row;
+        flex-direction: column;
+        width: 100px;
         flex-wrap: wrap;
         gap: 6px;
         margin-top: 0;
@@ -775,6 +772,9 @@ input[type="color"] {
     .event-type-color-dot {
         width: 10px;
         height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        display: inline-block;
     }
 
     .calendar {

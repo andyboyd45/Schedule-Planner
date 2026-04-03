@@ -74,11 +74,11 @@ function createEventTypeList(){
         li.textContent = event_type.name;
         li.dataset.eventTypeData = JSON.stringify(event_type);
 
-        const colorBox = document.createElement('span');
-        colorBox.classList.add('color-box');
-        colorBox.style.backgroundColor = event_type.color;
+        const colordot = document.createElement('span');
+        colordot.classList.add('event-type-color-dot');
+        colordot.style.backgroundColor = event_type.color;
 
-        li.appendChild(colorBox);
+        li.appendChild(colordot);
         event_type_list.appendChild(li);
 
         const option = document.createElement('option');
