@@ -181,6 +181,7 @@ def planner_data():
 def save_planner_data():
     data = request.get_json()
     planner = json.dumps(data.get('planner_data'))
+    event_types = json.dumps(data.get('event_type'))
     
     user_id = session['user_id']
     
@@ -194,6 +195,9 @@ def save_planner_data():
         cursor = db.cursor()
         
         cursor.execute('UPDATE planner SET planner_data = %s WHERE user_ID = %s',(planner,user_id))
+        db.commit()
+        
+        cursor.execute('UPDATE planner SET event_types = %s WHERE user_ID = %s',(event_types, user_id))
         db.commit()
         
         return jsonify({'message':'Data uploaded successfuly'}), 201

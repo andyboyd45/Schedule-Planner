@@ -50,6 +50,28 @@ body{
     font-weight: 700;
     letter-spacing: 1px;
 }
+
+.start-btns{
+    display: flex;
+    margin-top: 8px;
+    gap: 12px;
+}
+
+.start-btn{
+    text-decoration: none;
+    background: #e4ea17;
+    color: var(--text-color);
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px; 
+    text-align: center;   
+    width: 160px;
+    height: 40px;
+}
+
+
 .logo{
     display: flex;
     align-items: center;
@@ -125,6 +147,7 @@ body{
     padding: 0 15px;
     border: 1px solid #ccc;
 }
+
 .signup-button{
     font-family: 'Montserrat', sans-serif;
     border-radius: 20px;
@@ -157,14 +180,16 @@ body{
     border-radius: 18px;
     padding: 12px 22px;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 98%;
     margin: 0px auto;
 }
 
-.date{
+.date-header{
     display: flex;
+    flex-direction: row;
 }
 
 .m{
@@ -181,6 +206,7 @@ body{
     border: none;
     cursor: pointer; 
 }
+
 .nxt{
     margin-right: 10px;
     background: none;
@@ -190,6 +216,7 @@ body{
 
 .view{
     display: flex;
+    flex-direction: row;
 }
 
 .view-type{
@@ -205,30 +232,56 @@ body{
 /* ── Main Layout ── */
 .main-layout {
     display: flex;
-    gap: 10px;
+    
     width: 98%;
+    height: 1000px;
     margin: 10px auto;
-    align-items: flex-start;
+    
 }
 
 /* ── Sidebar ── */
 .sidebar {
     background: #ffffff;
-    border-radius: 18px;
-    padding: 16px 12px;
-    width: 180px;
-    min-width: 180px;
-    height: 1000px;
-    max-height: 1000px;
+    border-radius: 18px 0px 0px 18px;
+    width: 15%;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    min-height: 200px;
 }
 
-.color-box{
-    width: 20px;
-    height: 20px;
+.sidebar-btn{
+    padding-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.add-type-btn {
+    background: #e4ea17;
+    color: #000000;
+    border: none;
+    border-radius: 15%;
+    padding: 10px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    width: 58%;
+    transition: opacity 0.2s ease;
+}
+
+.add-type-btn:hover {
+    opacity: 0.85;
+}
+
+.event-types-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 6px;
+    margin-left: 2%;
+    overflow-y: auto;
 }
 
 .event-type-item{
@@ -236,7 +289,7 @@ body{
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    width: 100%;
+    width: 95%;
     padding: 8px 10px;
     border: none;
     border-radius: 10px;
@@ -249,151 +302,67 @@ body{
     transition: background 0.2s ease;
 }
 
-.add-type-btn {
-    background: #e4ea17;
-    color: #000000;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 8px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    width: 100%;
-    transition: opacity 0.2s ease;
-}
-
-.add-type-btn:hover {
-    opacity: 0.85;
-}
-
-/* ── Event Types List ── */
-.event-types-list {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-top: 4px;
-}
-
-.event-type-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-    padding: 8px 10px;
-    border: none;
-    border-radius: 10px;
-    background: #f5f5f5;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    text-align: left;
-    transition: background 0.2s ease;
-}
-
-.event-type-btn:hover {
-    background: #eaeaea;
-}
-
 .event-type-color-dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
     flex-shrink: 0;
-    display: inline-block;
+    
 }
 
-.event-type-label {
-    text-transform: capitalize;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-/* ── Calendar takes remaining space ── */
+/* ── Calendar ── */
 .calendar {
-    flex: 1;
+    
     background-color: #ffffff;
     background-position: center;
-    border-radius: 18px;
-    width: auto;
-    min-width: 0;
-    height: 1000px;
-    margin: 0;
-
+    border-radius: 0% 2% 2% 0%;
+    border-color: var(--background-color);
+    width: 85%;
     border-collapse: collapse;
-    border-spacing: 0;
-    padding: 0;
+
 }
 
-.calendar td{
-    font-family: 'Inter', sans-serif;
-    border: 1px solid #d7d4d4;
-    vertical-align: top;
-    height: 100px;
-    width: 14.28%;
-    padding: 6px 8px;
-    font-size: 13px;
-}
-
+/* ── Calendar Header ── */
 .calendar th{
-    border: 1px solid #d7d4d4;
+    border: 1px solid var(--background-color);
     font-weight: 400;
-    font-size: 13px;
+    font-size: 14px;
     color: #6b7280;
     padding: 10px 0;
     text-align: center;
     letter-spacing: 0.5px;    
 }
 
-.event-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
+/* ── Calendar Body ── */
+.calendar td{
+    font-family: 'Inter', sans-serif;
+    border: 1px solid #d7d4d4;
+    vertical-align: top;
+    height: 16.67%;
+    width: 14.28%;
+    padding: 6px 8px;
 }
 
-.event-list .event-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1.5px solid #e0e0e0;
-  background-color: #ffffff;
-  color: #333333;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+.date{
+    display: flex;
+    flex-direction: column;
+    max-height: 147.19px;
 }
 
-.date_cell{
+.date-cell{
     display: flex;
     justify-content: space-between; 
 }
+
 .day {
     padding-top: 0%;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     align-items: center;
     justify-content: center;
     display: flex;
     width: 28px;
     height: 28px;
-}
-
-.today{
-    background-color: black;
-    color: white;
-    border-radius: 50%;
-}
-
-.calendar td.empty{
-    border: none;
 }
 
 .add-event-btn{
@@ -403,6 +372,7 @@ body{
     height: 24px;
     border: none;
     border-radius: 50%;
+    margin-top: 2px;
     padding-left: 8px;
     font-size: 14px;
     display: flex;
@@ -416,6 +386,31 @@ body{
     font-size: 14px;
 }
 
+.event-list {
+    list-style: none;
+    overflow-y: auto;
+}
+
+.event-item {
+  border-radius: 8px;
+  border: 1.5px solid #e0e0e0;
+  background-color: #ffffff;
+  color: #333333;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 1px 3px !important;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.today{
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+}
+
+/*── Event Forms ──*/
 .overlay {
     display: none;
     position: fixed;
@@ -429,6 +424,7 @@ body{
 
 .event-form {
     display: none;
+    flex-direction: column;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -439,6 +435,12 @@ body{
     width: 320px;
     z-index: 100;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.start-time-label {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
 .event-form h3 {
@@ -613,237 +615,101 @@ input[type="color"] {
 
 /* ── Mobile (max 600px) ── */
 @media (max-width: 600px) {
-
-    body {
-        padding: 4px;
-    }
-
-    .page-header {
-        border-radius: 12px;
-        padding: 10px 14px;
-        margin: 6px auto;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    .logo-icon {
-        width: 44px;
-        height: 44px;
-        margin-right: 8px;
-        margin-left: -8px;
-    }
-
-    .logo-text {
-        font-size: 15px;
-    }
-
-    .top-links a {
-        font-size: 10px;
-    }
-
-    .Main {
-        height: 500px;
-        border-radius: 12px;
-        margin: 6px auto;
-        width: 100%;
-    }
-
-    .Text {
-        width: 85%;
-        margin-top: 30%;
-    }
-
-    .title {
-        font-size: 16px;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        margin-top: 12px;
-    }
-
-    .nav-links a {
-        width: 160px;
-        text-align: center;
-        padding: 10px 16px;
-        border-radius: 10px;
-        font-size: 10px;
-    }
-
-    .form-container {
-        border-radius: 12px;
-        height: auto;
-        padding: 32px 20px;
-        margin: 6px auto;
-        width: 100%;
-    }
-
-    .form-input {
-        width: 240px;
-    }
-
-    .signup-button {
-        width: 240px;
-    }
-
-    .calendar-header {
-        border-radius: 12px;
-        margin: 6px auto;
-        width: 100%;
-        flex-direction: row;
-        gap: 8px;
-        padding: 10px 14px;
-    }
-
-    .date {
+    /*Calendar Header*/
+    .date-header{
+        margin-top: 6px;
         align-items: center;
     }
 
-    .m, .y {
-        font-size: 14px;
-        padding-top: 0;
+    .m, .y{
+        font-size: 10pt;
     }
 
-    .view {
-        width: 100%;
-        margin-left: 5%;
-        height: 30px;
-        justify-content: space-between;
+    .view{
+        margin: 0px;
+        height: 40px;
+    }
+
+    .view-type{
+        display: flex;
+        flex-direction: column;
         align-items: center;
+        margin-right: 0px;
+        gap: 3px;
     }
 
-    .view-type {
-        margin-right: 0;
-        padding-top: 1%;
-        height: 100%;
+    .view-type label{
+        font-size: 8pt;
     }
 
-    .view-type label {
-        font-size: 11px;
-    }
-
-    .view-type select {
-        font-size: 12px;
-    }
-
-    .view-message .Message {
-        font-size: 12px;
-    }
-
-    .main-layout {
-        flex-direction: row;
-        width: 100%;
-        gap: 6px;
-        margin: 6px auto;
-    }
-
-    .sidebar {
-        width: 100px;
-        min-width: unset;
-        border-radius: 12px;
-        padding: 10px;
-        flex-direction: column;
-        gap: 6px;
-    }
-
-    .add-type-btn {
-        width: 100%;
-        padding: 10px;
-        font-size: 9px;
-        border-radius: 8px;
-    }
-
-    .event-types-list {
-        flex-direction: column;
-        width: 100px;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-top: 0;
-    }
-
-    .event-type-btn {
-        width: auto;
-        padding: 6px 10px;
-        font-size: 11px;
-        border-radius: 8px;
-    }
-
-    .event-type-color-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        flex-shrink: 0;
-        display: inline-block;
-    }
-
-    .calendar {
-        height: 550px;
-        max-height: 550px;
-        margin: 0;
-    }
-
-    .calendar th {
-        font-size: 10px;
-        padding: 6px 0;
-    }
-
-    .calendar td {
-        height: 60px;
-        padding: 3px 4px;
-        font-size: 10px;
-    }
-
-    .day {
-        font-size: 10px;
-        width: 22px;
-        height: 22px;
-    }
-
-    .add-event-btn {
-        width: 20px;
+    .view-select{
+        width: 50px;
         height: 20px;
-        padding-left: 6px;
+        font-size: 8pt;
     }
 
-    .add-event-btn .plus {
-        font-size: 12px;
+    .view-message{
+        font-size: 8pt;
     }
 
-    .event-item {
-        font-size: 9px;
-        padding: 3px 5px;
-        border-radius: 4px;
+    /*Main layout*/
+    .main-layout{
+        height: 600px; 
+    }
+    /*SideBar*/
+    .sidebar{
+        height: 100%
+    }
+    .add-type-btn{
+        font-size: 6pt;
+    }
+    .event-type-item{
+        font-size: 7pt;
+    }
+    /*Calendar*/
+    .calendar{
+        height: 600px;
     }
 
-    .event-form {
-        width: 90vw;
-        max-width: 340px;
-        padding: 18px 16px;
-        border-radius: 12px;
+    
+
+    .calendar th{
+        font-size: 8pt;
     }
 
-    .event-form h3 {
-        font-size: 14px;
+    .date{
+        height: 88.21px;
+        max-height: 88.21px;
+        max-width: 49.06px;
     }
 
-    .event-form label {
-        font-size: 12px;
+    .day{
+        font-size: 8pt;
+        width:14px;
+        height:14px;     
+
     }
 
-    .event-form input,
-    .event-form select {
-        font-size: 13px;
-        padding: 7px;
+    .add-event-btn{
+        width:14px;
+        height:14px;
+        padding-left: 4px;
     }
 
-    .form-buttons button {
-        font-size: 13px;
-        padding: 9px;
+    .add-event-btn .plus{
+        font-size: 8pt;
     }
 
-    input[type="color"] {
-        height: 36px;
+    .event-list{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
     }
+
+    .event-item{
+        font-size: 6pt;
+    }
+
+
 }
+

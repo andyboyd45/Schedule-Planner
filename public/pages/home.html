@@ -22,7 +22,7 @@
         </header>
 
         <div class="calendar-header">
-            <div class = "date">
+            <div class = "date-header">
                 <p id = "month" class = 'm'>Month-placeholder</p>
                 <p id = "year" class = 'y'>Year-placeholder</p>
                 <button id="prev" class = "pr"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg></button>
@@ -47,7 +47,10 @@
 
             <!-- Left Sidebar -->
             <div class="sidebar">
-                <button class="add-type-btn" id="add-type-btn">+ Add Event Type</button>
+                <div class = "sidebar-btn">
+                    <button class="add-type-btn" id="add-type-btn">+ Add Event Type</button>
+                </div>
+
 
                 <div class="event-types-list" id="event-types-list">
                     <!-- Event type buttons injected here by JS -->
@@ -80,7 +83,10 @@
                 <!-- Populated dynamically by JS -->
             </select>
 
-            <label>Start Time</label>
+            <label class = "start-time-label">
+                <span>Start Time</span>
+                <button type="button" id="all-day-toggle">Start/End time</button>
+            </label>
             <input type="time" id="event-start">
 
             <label>End Time</label>
@@ -94,7 +100,7 @@
             </div>
         </div>
 
-        <!-- Add/Edit Event Type Popup -->
+        <!-- Add Event Type Popup -->
         <div id="event-type-form" class="event-form">
             <h3 id="event-type-title">Add Event Type</h3>
 
