@@ -36,13 +36,3 @@ A full-stack web application that allows users to plan, organize, and manage eve
 
 - bcrypt (password hashing)
 - dotenv (environment variables)
-
----
-
-## ⚙️ Installation & Setup
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/yourusername/schedule-planner.git
-cd schedule-planner
